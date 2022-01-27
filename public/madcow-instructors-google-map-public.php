@@ -43,7 +43,7 @@ function instructor_map() {
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
 		$short_description = get_field( 'short_description', $instructor_id, false);
 		$marker_icon = "";
-		
+
 		if($regional_director == "yes" || $regional_director == TRUE) {
 			$marker_icon = esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) );
 		}
@@ -67,7 +67,7 @@ function instructor_map() {
 				}
 			}
 		}
-		
+
         if( $location['lat'] && $location['lng'] ) :
 			$html .= '<div id="marker-' . $instructor_nicename . '" class="marker" data-lat="' . $location["lat"] . '" data-lng="' . $location["lng"] . '" data-marker="' . $marker_icon . '">';
 			$html .= '<div id="' . $instructor_nicename . '" class="madcow-instructors-map-marker">';
@@ -96,7 +96,7 @@ function madcow_instructors_show_map_legend() {
 			echo '<small>ChiRunning & ChiWalking:</small>';
 			echo '</em>';
 		echo '</div>';
-		
+
 		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) ) . '" />';
@@ -117,7 +117,7 @@ function madcow_instructors_show_map_legend() {
 			echo '</figure>';
 			echo '<em>Master Instructor</em>';
 		echo '</div>';
-		
+
 		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) ) . '" />';
@@ -130,7 +130,7 @@ function madcow_instructors_show_map_legend() {
 			echo '<small>ChiWalking:</small>';
 			echo '</em>';
 		echo '</div>';
-		
+
 		echo '<div class="walking-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chiwalking-instructor.png', __FILE__ ) ) . '" />';
@@ -148,32 +148,32 @@ function madcow_instructors_show_instructors_search_filter($show_country_list_fi
 		$last_level_filtered = $_POST["madcow-instructors-level-list-filter"];
 		$last_search = $_POST["madcow-instructors-search"];
 	}
-	
+
 	//temporarily overriding default values, set up for shortcode parameters later on
 	$show_country_list_filter = TRUE;
 	$show_certification_filter = FALSE;
 	$show_level_filter = FALSE;
 	$show_search = TRUE;
-	
+
 	//Start form
 	echo '<form id="madcow-instructors-search-filter-form" method="post" action="' . get_permalink() . '">';
-	
+
 	if($show_country_list_filter) {
 		echo madcow_instructors_show_country_list_filter($last_country_filtered);
 	}
-	
+
 	if($show_certification_filter) {
 		echo madcow_instructors_show_certification_filter($last_certification_filtered);
 	}
-	
+
 	if($show_level_filter) {
 		echo madcow_instructors_show_level_filter($last_level_filtered);
 	}
-	
+
 	if($show_search) {
 		echo '<label for="madcow-instructors-search">Search: </label><input type="text" id="madcow-instructors-search" name="madcow-instructors-search" placeholder="' . $last_search . '" />';
 	}
-	
+
 	echo '<input type="submit" id="madcow-instructors-search-filter-form-submit" name="madcow-instructors-search-filter-form-submit" value="Filter / Search" />';
 	echo '</form>';
 }
@@ -192,10 +192,10 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 		echo $search_query . "<br />"; */
 	}
 	$instructors = madcow_instructors_get_instructors($country_list_filter, $certification_filter, $level_filter, $search_query);
-	
+
 	//results count
 	$num_results = count($instructors);
-	
+
 	$html = '<div id="madcow-instructors-instructor-count" class=""><em>Showing ';
 	$html .= $num_results . ' ';
 	if($num_results == 1) {
@@ -205,9 +205,9 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 		$html .= 'instructors';
 	}
 	$html .= '</em></div>';
-	
+
 	$html .= '<div id="madcow-instructors-instructor-list" class="">';
-	
+
 	foreach ( $instructors as $instructor ) :
 		$instructor_id = 'user_'. esc_html( $instructor->ID );
         $instructor_name = $instructor->display_name;
@@ -219,7 +219,7 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 		$certification_date = get_field( 'certification_date', $instructor_id, false);
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
 		$short_description = get_field( 'short_description', $instructor_id, false);
-		
+
 		$html .= '<div class="madcow-instructor-list-item">';
 		$html .= '<article class="madcow-instructor-list-item-article">';
 		$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-left">';
@@ -254,14 +254,14 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 		$html .= '</div>';
 		$html .= '</div>';
 	endforeach;
-	
+
 	$html .= '</div>';
 
     return $html;
 }
 
 //Helper functions
- 
+
 //Returns list of instructors based on filters and search query, defaults to returning full list without filters or search query
 function madcow_instructors_get_instructors($country_list_filter = "", $certification_filter = "", $level_filter = "", $search_query = "") {
 	/* Types of filters
@@ -517,16 +517,16 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		'YE' => 'Yemen',
 		'ZM' => 'Zambia',
 		'ZW' => 'Zimbabwe',
-	);	
-	
+	);
+
 	$search_query = '*' . $search_query . '*';
-	
+
 	$instructors = get_users( array( 'role__in' => array( 'instructor' ), 'search' => $search_query ) );
-	
+
 	if(isset($country_list_filter) && $country_list_filter !== "") {
 		//Set up $temp array for holding new results
 		$temp = array();
-		
+
 		foreach ( $instructors as $instructor ) :
 			$instructor_id = 'user_'. esc_html( $instructor->ID );
 			$location = get_field('location', $instructor_id);
@@ -541,7 +541,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		endforeach;
 		$instructors = $temp;
 	}
-	
+
 	switch($certification_filter) {
 		case "chirunning":
 			break;
@@ -549,7 +549,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 			break;
 		default:
 	}
-	
+
 	switch($level_filter) {
 		case "certified_instructor":
 			break;
@@ -561,23 +561,23 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 			break;
 		default:
 	}
-	
+
 	return $instructors;
 }
 
 function madcow_instructors_show_country_list_filter($last_country_filtered) {
 	$countries = madcow_instructors_get_instructor_countries();
-	
+
 	$html = '<label for="madcow-instructors-country-list-filter">Country: </label>';
 	$html .= '<select name="madcow-instructors-country-list-filter" id="madcow-instructors-country-list-filter" class="madcow-instructors-filter-select madcow-instructors-countries-select">';
-	
+
 	$html .= '<option value="" ';
 	if (!isset($last_country_filtered) || $last_country_filtered == "") {
 		$html .= 'selected="selected"';
 	}
 	$html .= '>Select a country / region…</option>';
-	
-	
+
+
 	foreach($countries as $country=>$country_name) :
 		$html .= '<option value="' . $country . '"';
 		if($last_country_filtered == $country) {
@@ -585,31 +585,31 @@ function madcow_instructors_show_country_list_filter($last_country_filtered) {
 		}
 		$html .= '>' . $country_name . '</option>';
 	endforeach;
-	
+
 	$html .= '</select>';
-	
+
 	return $html;
 }
 
 function madcow_instructors_show_certification_filter($last_certification_filtered) {
 	$html = '<label for="madcow-instructors-certification-list-filter">Country: </label>';
 	$html .= '<select name="madcow-instructors-certification-list-filter" id="madcow-instructors-certification-list-filter" class="madcow-instructors-filter-select madcow-instructors-certification-select">';
-	
+
 	//options for certifications
-	
+
 	$html .= '</select>';
-	
+
 	return $html;
 }
 
 function madcow_instructors_show_level_filter($last_level_filtered) {
 	$html = '<label for="madcow-instructors-level-list-filter">Country: </label>';
 	$html .= '<select name="madcow-instructors-level-list-filter" id="madcow-instructors-level-list-filter" class="madcow-instructors-filter-select madcow-instructors-level-select">';
-	
+
 	//options for levels
-	
+
 	$html .= '</select>';
-	
+
 	return $html;
 }
 
@@ -862,26 +862,26 @@ function madcow_instructors_get_instructor_countries() {
 		'ZM' => 'Zambia',
 		'ZW' => 'Zimbabwe',
 	);
-	
+
 	$instructor_countries = array();
  	$instructors = get_users( array( 'role__in' => array( 'instructor' ) ) );
 
     foreach ( $instructors as $instructor ) :
         $instructor_id = 'user_'. esc_html( $instructor->ID );
         $location = get_field('location', $instructor_id);
-		
+
         if($location['country']) {
 			$key = array_search($location['country'], $countries);
 			if($key) {
 				$instructor_countries[$key] = $location['country'];
 			}
-		}	
+		}
 	endforeach;
 
 	asort($instructor_countries);
 	return $instructor_countries;
 }
- 
+
 
 /* Reverse GeoCoding */
 
@@ -889,7 +889,8 @@ function madcow_instructors_get_instructor_countries() {
 function madcow_instructors_get_instructor_address($lat,$lng)
 {
     $country = array();
-	$url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$lng.'&sensor=false&key=AIzaSyCbUl_nRuqQqr3mNXHtD-Z8erSkvRlwMfM';
+	//$url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$lng.'&sensor=false&key=AIzaSyCbUl_nRuqQqr3mNXHtD-Z8erSkvRlwMfM';
+    $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$lng.'&sensor=false&key=AIzaSyAUFQIb76kk-aNd6PaafnxkgM54RDIfZgE';
     $json = @file_get_contents($url);
     $data = json_decode($json);
     $status = $data->status;
@@ -916,7 +917,7 @@ function madcow_instructors_update_instructor_country($user_id) {
 	$country_short = $updated_location['country_short'];
 	$lat = $updated_location['lat'];
 	$lng = $updated_location['lng'];
-	
+
 	if(!$user_id) {
 		$user = wp_get_current_user();
 		$instructor_id = 'user_' . $user->ID;
@@ -924,13 +925,13 @@ function madcow_instructors_update_instructor_country($user_id) {
 	else {
 		$instructor_id = 'user_'. $user_id;
 	}
-	
+
  	if($country == "" && $country_short == "") {
 		if($lat !== "" && $lng !== "") {
 			$reverse_geo_result = madcow_instructors_get_instructor_address($lat,$lng);
 			$updated_location['country'] = $reverse_geo_result[0];
 			$updated_location['country_short'] = array_keys($reverse_geo_result)[0];
-			
+
 			update_field('location', $updated_location , $instructor_id);
 		}
 	}
