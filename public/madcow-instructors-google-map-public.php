@@ -237,7 +237,7 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 			$html .= ' • <em>' . $short_description . '</em>';
 		}
 		else {
-			$html .= ' • <em>No short description set.</em>';
+			$html .= '';
 		}
 		$html .= '</h5>';
 		$html .= '</div>';
