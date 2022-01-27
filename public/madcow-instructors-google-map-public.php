@@ -212,6 +212,7 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 		$instructor_id = 'user_'. esc_html( $instructor->ID );
         $instructor_name = $instructor->display_name;
 		$instructor_nicename = $instructor->user_nicename;
+        $instructor_photo = get_field('source_photo', $instructor_id);
         $location = get_field('location', $instructor_id);
 		$certification_level = ucwords(get_field( 'certification_level', $instructor_id, false));
 		$chirunning_certification = get_field( 'chirunning_certification', $instructor_id, false);
@@ -223,7 +224,12 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 		$html .= '<div class="madcow-instructor-list-item">';
 		$html .= '<article class="madcow-instructor-list-item-article">';
 		$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-left">';
-		$html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
+        if($instructor_photo) {
+            $html .= '<img src="' . $instructor_photo . '">';
+        }
+        else {
+		    $html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
+        }
 		$html .= '</div>';
 		$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-center">';
 		$html .= '<h5><a href="/instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-name-link">' . $instructor_name . '</a>';
