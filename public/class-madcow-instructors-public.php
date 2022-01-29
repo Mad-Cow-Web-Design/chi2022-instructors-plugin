@@ -106,19 +106,12 @@ class Madcow_Instructors_Public {
 		//wp_enqueue_script( 'madcow_instructors_google_maps_api', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCbUl_nRuqQqr3mNXHtD-Z8erSkvRlwMfM', null, null, false );
 		
 		//Madcow API key
-		//wp_enqueue_script( 'madcow_instructors_google_maps_api', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAUFQIb76kk-aNd6PaafnxkgM54RDIfZgE', null, false, false );
+		wp_enqueue_script( 'madcow_instructors_google_maps_api', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAUFQIb76kk-aNd6PaafnxkgM54RDIfZgE', null, false, false );
 		wp_enqueue_script( $this->madcow_instructors, plugin_dir_url( __FILE__ ) . 'js/madcow-instructors-public.js', array( 'jquery', 'madcow_instructors_google_maps_api' ), $this->version, true );
 
 	}
 
 }
-
-add_action('wp_head','madcow_instructors_google_maps_api');
-
-function madcow_instructors_google_maps_api()
-{ ?>
-<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAUFQIb76kk-aNd6PaafnxkgM54RDIfZgE' id='madcow_instructors_google_maps_api-js'></script>
-<?php }
 
 //Include files organized by types of functions
 include_once plugin_dir_path( __FILE__ ) . 'madcow-instructors-shortcodes-public.php';
