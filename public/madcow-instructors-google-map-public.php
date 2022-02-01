@@ -890,7 +890,7 @@ function madcow_instructors_get_instructor_countries() {
 
 
 /* Reverse GeoCoding */
-
+/* 
 //Run on Profile save, check to see if there is a value being saved in ACF for country, if not - reverse geocode to get the country and save that
 function madcow_instructors_get_instructor_address($lat,$lng)
 {
@@ -941,4 +941,4 @@ function madcow_instructors_update_instructor_country($user_id) {
 			update_field('location', $updated_location , $instructor_id);
 		}
 	}
-}
+} */
