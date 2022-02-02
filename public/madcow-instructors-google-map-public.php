@@ -211,35 +211,23 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 
 		$html .= '<div class="madcow-instructor-list-item">';
 		$html .= '<article class="madcow-instructor-list-item-article">';
-		//$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-left">';
         if($instructor_photo) {
-            $html .= '<img src="' . $instructor_photo . '">';
+            $html .= '<img class="instructor-photo" src="' . $instructor_photo . '">';
         }
         else {
 		    $html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
         }
-		//$html .= '</div>';
-		//$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-center">';
 		$html .= '<h5>' . $instructor_name . '</h5>';
-		//$html .= '</div>';
-		//$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-right">';
-		$html .= '<p class="certification-level">';
+		$html .= '<div class="certification-level">';
 		if($chirunning_certification == "yes") {
 			$html .= '<figure><img class="cert-level-icon" src="' . esc_url( plugins_url('images/chirunning-circle.svg', __FILE__ ) ) . '" alt="ChiRunning Certified" /></figure>';
 		}
 		if($chiwalking_certification == "yes") {
 			$html .= '<figure><img class="cert-level-icon" src="' . esc_url( plugins_url('images/chiwalking-circle.svg', __FILE__ ) ) . '" alt="ChiWalking Certified" /></figure>';
 		}
-        $html .= $certification_level . '</p>';
-		//$html .= '</div>';
-		$html .= '</article>';
-		$html .= '<div>';
-		$html .= '<nav class="madcow-instructors-list-button-container">';
-		$html .= '<span class="madcow-instructors-list-button-container-button">';
-		$html .= '<a href="https://www.chirunning.com/instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-button"><span>View Profile &amp; Workshops</span> <span class="icon"><i class="fas fa-arrow-right"></i></span></a>';
-		$html .= '</span>';
-		$html .= '</nav>';
-		$html .= '</div>';
+        $html .= $certification_level . '</div>';
+		$html .= '<a href="https://www.chirunning.com/instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-button"><span>VIEW PROFILE &amp; WORKSHOPS</span></a>';
+        $html .= '</article>';
 		$html .= '</div>';
 	endforeach;
 
