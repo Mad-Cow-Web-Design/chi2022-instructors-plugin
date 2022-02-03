@@ -41,7 +41,6 @@ function instructor_map() {
 		$chiwalking_certification = get_field( 'chiwalking_certification', $instructor_id, false);
 		$certification_date = get_field( 'certification_date', $instructor_id, false);
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
-		$short_description = get_field( 'short_description', $instructor_id, false);
 		$marker_icon = "";
 
 		if($regional_director == "yes" || $regional_director == TRUE) {
@@ -76,7 +75,6 @@ function instructor_map() {
 			$html .= '</div>';
 			$html .= '<div id="' . $instructor_nicename . '-details" class="madcow-instructors-map-marker-right">';
 			$html .= '<h5><a href="/instructor/' . $instructor_nicename . '/" class="madcow-instructors-map-marker-name-link">' . $instructor_name . '</a></h5>';
-			$html .= '<em>' . $short_description . '</em>';
 			$html .= '<p>' . $certification_level . '</p>';
 			$html .= '</div>';
 			$html .= '<div style="clear:both"></div>';
@@ -92,52 +90,40 @@ function instructor_map() {
 function madcow_instructors_show_map_legend() {
 	echo '<div class="map-legend">';
 		echo '<div class="running-legend">';
-			echo '<em>';
-			echo '<small>ChiRunning & ChiWalking:</small>';
-			echo '</em>';
-		echo '</div>';
-
-		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo '<em>Certified Instructor</em>';
+			echo 'CHIRUNNING</br>CERTIFIED INSTRUCTOR';
 		echo '</div>';
 
 		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-senior-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo '<em>Senior Instructor</em>';
+			echo 'CHIRUNNING</br>SENIOR INSTRUCTOR';
 		echo '</div>';
 
 		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo '<em>Master Instructor</em>';
+			echo 'CHIRUNNING</br>MASTER INSTRUCTOR';
 		echo '</div>';
 
 		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo '<em>Regional Director</em>';
-		echo '</div>';
-
-		echo '<div class="walking-legend">';
-			echo '<em>';
-			echo '<small>ChiWalking:</small>';
-			echo '</em>';
+			echo 'CHILIVING</br>REGIONAL DIRECTOR';
 		echo '</div>';
 
 		echo '<div class="walking-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chiwalking-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo '<em>Certified Instructor</em>';
+			echo 'CHIWALKING</br>CERTIFIED INSTRUCTOR';
 		echo '</div>';
-	echo '</div>';
+	echo '</div><h1>Find an Instructor</h1>';
 }
 
 function madcow_instructors_show_instructors_search_filter($show_country_list_filter = null, $show_certification_filter = null, $show_level_filter = null, $show_search = null) {
@@ -171,7 +157,7 @@ function madcow_instructors_show_instructors_search_filter($show_country_list_fi
 	}
 
 	if($show_search) {
-		echo '<label for="madcow-instructors-search">Search: </label><input type="text" id="madcow-instructors-search" name="madcow-instructors-search" placeholder="' . $last_search . '" />';
+		echo '<label for="madcow-instructors-search"></label><input type="text" id="madcow-instructors-search" name="madcow-instructors-search" placeholder="Search Certified Instructors" />';
 	}
 
 	echo '<input type="submit" id="madcow-instructors-search-filter-form-submit" name="madcow-instructors-search-filter-form-submit" value="Filter / Search" />';
@@ -219,45 +205,26 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 		$chiwalking_certification = get_field( 'chiwalking_certification', $instructor_id, false);
 		$certification_date = get_field( 'certification_date', $instructor_id, false);
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
-		$short_description = get_field( 'short_description', $instructor_id, false);
 
 		$html .= '<div class="madcow-instructor-list-item">';
 		$html .= '<article class="madcow-instructor-list-item-article">';
-		$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-left">';
         if($instructor_photo) {
-            $html .= '<img src="' . $instructor_photo . '">';
+            $html .= '<img class="instructor-photo" src="' . $instructor_photo . '">';
         }
         else {
 		    $html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
         }
-		$html .= '</div>';
-		$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-center">';
-		$html .= '<h5><a href="/instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-name-link">' . $instructor_name . '</a>';
-		if(isset($short_description) && $short_description !== "") {
-			$html .= ' • <em>' . $short_description . '</em>';
-		}
-		else {
-			$html .= '';
-		}
-		$html .= '</h5>';
-		$html .= '</div>';
-		$html .= '<div class="madcow-instructor-list-item-col madcow-instructor-list-item-article-right">';
-		$html .= '<p>' . $certification_level . '</p>';
+		$html .= '<h5>' . $instructor_name . '</h5>';
+		$html .= '<div class="certification-level">';
 		if($chirunning_certification == "yes") {
-			$html .= '<figure><img src="' . esc_url( plugins_url('images/chirunning-circle.svg', __FILE__ ) ) . '" alt="ChiRunning Certified" /></figure>';
+			$html .= '<figure><img class="cert-level-icon" src="' . esc_url( plugins_url('images/chirunning-circle.svg', __FILE__ ) ) . '" alt="ChiRunning Certified" /></figure>';
 		}
 		if($chiwalking_certification == "yes") {
-			$html .= '<figure><img src="' . esc_url( plugins_url('images/chiwalking-circle.svg', __FILE__ ) ) . '" alt="ChiWalking Certified" /></figure>';
+			$html .= '<figure><img class="cert-level-icon" src="' . esc_url( plugins_url('images/chiwalking-circle.svg', __FILE__ ) ) . '" alt="ChiWalking Certified" /></figure>';
 		}
-		$html .= '</div>';
-		$html .= '</article>';
-		$html .= '<div>';
-		$html .= '<nav class="madcow-instructors-list-button-container">';
-		$html .= '<span class="madcow-instructors-list-button-container-button">';
-		$html .= '<a href="https://www.chirunning.com/instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-button"><span>View Profile &amp; Workshops</span> <span class="icon"><i class="fas fa-arrow-right"></i></span></a>';
-		$html .= '</span>';
-		$html .= '</nav>';
-		$html .= '</div>';
+        $html .= $certification_level . '</div>';
+		$html .= '<a href="https://www.chirunning.com/instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-button"><span>VIEW PROFILE &amp; WORKSHOPS</span></a>';
+        $html .= '</article>';
 		$html .= '</div>';
 	endforeach;
 
@@ -574,14 +541,14 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 function madcow_instructors_show_country_list_filter($last_country_filtered) {
 	$countries = madcow_instructors_get_instructor_countries();
 
-	$html = '<label for="madcow-instructors-country-list-filter">Country: </label>';
+	$html = '<label for="madcow-instructors-country-list-filter"></label>';
 	$html .= '<select name="madcow-instructors-country-list-filter" id="madcow-instructors-country-list-filter" class="madcow-instructors-filter-select madcow-instructors-countries-select">';
 
 	$html .= '<option value="" ';
 	if (!isset($last_country_filtered) || $last_country_filtered == "") {
 		$html .= 'selected="selected"';
 	}
-	$html .= '>Select a country / region…</option>';
+	$html .= '>Search by Country / Region</option>';
 
 
 	foreach($countries as $country=>$country_name) :
@@ -890,7 +857,7 @@ function madcow_instructors_get_instructor_countries() {
 
 
 /* Reverse GeoCoding */
-/* 
+/*
 //Run on Profile save, check to see if there is a value being saved in ACF for country, if not - reverse geocode to get the country and save that
 function madcow_instructors_get_instructor_address($lat,$lng)
 {
