@@ -74,7 +74,6 @@ class Madcow_Instructors_Public {
 		 */
 
 		wp_enqueue_style( $this->madcow_instructors, plugin_dir_url( __FILE__ ) . 'css/madcow-instructors-public.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'madcow-instructors-google-map-public', plugin_dir_url( __FILE__ ) . 'css/madcow-instructors-google-map-public.css', array(), $this->version, 'all' );
 		
 		if ( is_user_logged_in() ) {
 			wp_enqueue_style( 'madcow-instructors-logged-in-public', plugin_dir_url( __FILE__ ) . 'css/madcow-instructors-logged-in-public.css', array(), $this->version, 'all' );
