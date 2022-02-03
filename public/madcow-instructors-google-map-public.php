@@ -223,7 +223,7 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 			$html .= '<figure><img class="cert-level-icon" src="' . esc_url( plugins_url('images/chiwalking-circle.svg', __FILE__ ) ) . '" alt="ChiWalking Certified" /></figure>';
 		}
         $html .= $certification_level . '</div>';
-		$html .= '<a href="https://www.chirunning.com/instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-button"><span>VIEW PROFILE &amp; WORKSHOPS</span></a>';
+		$html .= '<a href="' . home_url('/') . 'instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-button"><span>VIEW PROFILE &amp; WORKSHOPS</span></a>';
         $html .= '</article>';
 		$html .= '</div>';
 	endforeach;
