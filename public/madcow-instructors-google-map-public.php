@@ -41,7 +41,6 @@ function instructor_map() {
 		$chiwalking_certification = get_field( 'chiwalking_certification', $instructor_id, false);
 		$certification_date = get_field( 'certification_date', $instructor_id, false);
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
-		$short_description = get_field( 'short_description', $instructor_id, false);
 		$marker_icon = "";
 
 		if($regional_director == "yes" || $regional_director == TRUE) {
@@ -76,7 +75,6 @@ function instructor_map() {
 			$html .= '</div>';
 			$html .= '<div id="' . $instructor_nicename . '-details" class="madcow-instructors-map-marker-right">';
 			$html .= '<h5><a href="/instructor/' . $instructor_nicename . '/" class="madcow-instructors-map-marker-name-link">' . $instructor_name . '</a></h5>';
-			$html .= '<em>' . $short_description . '</em>';
 			$html .= '<p>' . $certification_level . '</p>';
 			$html .= '</div>';
 			$html .= '<div style="clear:both"></div>';
@@ -207,7 +205,6 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 		$chiwalking_certification = get_field( 'chiwalking_certification', $instructor_id, false);
 		$certification_date = get_field( 'certification_date', $instructor_id, false);
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
-		$short_description = get_field( 'short_description', $instructor_id, false);
 
 		$html .= '<div class="madcow-instructor-list-item">';
 		$html .= '<article class="madcow-instructor-list-item-article">';
