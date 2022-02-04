@@ -43,7 +43,7 @@ function instructor_map() {
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
 		$marker_icon = "";
 
-		if(strcasecmp($regional_director, "yes") == 0) {
+		if($regional_director == 1) {
 			$marker_icon = esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) );
 		}
 		else {
@@ -75,7 +75,7 @@ function instructor_map() {
 			$html .= '</div>';
 			$html .= '<div id="' . $instructor_nicename . '-details" class="madcow-instructors-map-marker-right">';
 			$html .= '<h5><a href="/instructor/' . $instructor_nicename . '/" class="madcow-instructors-map-marker-name-link">' . $instructor_name . '</a></h5>';
-			$html .= '<p>' . $certification_level . '</p>';
+			$html .= '<p>' . $certification_level . ' / ' . $regional_director . '</p>';
 			$html .= '</div>';
 			$html .= '<div style="clear:both"></div>';
 			$html .= '</div>';
