@@ -43,10 +43,10 @@ function instructor_map() {
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
 		$marker_icon = "";
 
-		/* if($regional_director == "yes") {
+		if($regional_director === 1) {
 			$marker_icon = esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) );
 		}
-		else { */
+		else {
 			if((isset($chiwalking_certification) && !isset($chirunning_certification)) || (($chiwalking_certification == "yes") && ($chirunning_certification == "no"))) {
 				$marker_icon = esc_url( plugins_url('images/pin-chiwalking-instructor.png', __FILE__ ) );
 			}
@@ -65,7 +65,7 @@ function instructor_map() {
 						$marker_icon = "";
 				}
 			}
-		//}
+		}
 
         if( $location['lat'] && $location['lng'] ) :
 			$html .= '<div id="marker-' . $instructor_nicename . '" class="marker" data-lat="' . $location["lat"] . '" data-lng="' . $location["lng"] . '" data-marker="' . $marker_icon . '">';
@@ -75,7 +75,7 @@ function instructor_map() {
 			$html .= '</div>';
 			$html .= '<div id="' . $instructor_nicename . '-details" class="madcow-instructors-map-marker-right">';
 			$html .= '<h5><a href="/instructor/' . $instructor_nicename . '/" class="madcow-instructors-map-marker-name-link">' . $instructor_name . '</a></h5>';
-			$html .= '<p>' . $certification_level . '</p>';
+			$html .= '<p>' . $certification_level . ' / ' . $regional_director . '</p>';
 			$html .= '</div>';
 			$html .= '<div style="clear:both"></div>';
 			$html .= '</div>';
