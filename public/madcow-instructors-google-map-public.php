@@ -43,7 +43,7 @@ function instructor_map() {
 		$regional_director = get_field( 'regional_director', $instructor_id, false);
 		$marker_icon = "";
 
-		if($regional_director == "yes" || $regional_director == TRUE) {
+		if($regional_director == "yes") {
 			$marker_icon = esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) );
 		}
 		else {
