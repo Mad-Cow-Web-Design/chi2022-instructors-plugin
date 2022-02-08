@@ -29,7 +29,7 @@ function instructor_map() {
 		if($_POST["madcow-instructors-search"] && $_POST["madcow-instructors-search"] !== "") { $last_search = $_POST["madcow-instructors-search"]; }
 	}
 	$instructors = madcow_instructors_get_instructors($last_country_filtered, $last_certification_filtered, $last_level_filtered, $last_search);
-    $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map" data-zoom="20">';
+    $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map" data-zoom="25">';
     foreach ( $instructors as $instructor ) :
         // Creating the var instructor_id to use with ACF Pro
         $instructor_id = 'user_'. esc_html( $instructor->ID );
