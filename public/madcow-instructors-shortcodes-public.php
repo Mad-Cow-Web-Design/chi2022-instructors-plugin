@@ -28,4 +28,5 @@ function madcow_instructors_shortcodes(){
 	add_shortcode('madcow-instructors-show-map-legend', 'madcow_instructors_show_map_legend');
 	add_shortcode('madcow-instructors-show-instructors-list', 'madcow_instructors_show_instructors_list');
 	add_shortcode('madcow-instructors-show-instructors-search-filter', 'madcow_instructors_show_instructors_search_filter');
+	add_shortcode('workshop-map', 'workshop_map');
 }

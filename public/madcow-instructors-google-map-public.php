@@ -909,3 +909,73 @@ function madcow_instructors_update_instructor_country($user_id) {
 		}
 	}
 } */
+
+
+/* WORKSHOPS MAP */
+
+function workshop_map() {
+
+	// $workshops = madcow_instructors_get_workshops();
+    // $html = '<div id="madcow-instructors-find-a-workshop" class="acf-map madcow-instructors-google-map" data-zoom="16">';
+    // foreach ( $instructors as $instructor ) :
+        // // Creating the var instructor_id to use with ACF Pro
+        // $instructor_id = 'user_'. esc_html( $instructor->ID );
+        // $instructor_name = $instructor->display_name;
+		// $instructor_nicename = $instructor->user_nicename;
+        // $location = get_field('location', $instructor_id);
+ 		// /* $certification_level = ucwords(get_field( 'certification_level', $instructor_id, false));
+		// $chirunning_certification = get_field( 'chirunning_certification', $instructor_id, false);
+		// $chiwalking_certification = get_field( 'chiwalking_certification', $instructor_id, false);
+		// $certification_date = get_field( 'certification_date', $instructor_id, false);
+		// $regional_director = get_field( 'regional_director', $instructor_id, false); */
+		// //$marker_icon = "";
+
+		// /* if($regional_director === "yes") {
+			// $marker_icon = esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) );
+		// }
+		// else {
+			// if((isset($chiwalking_certification) && !isset($chirunning_certification)) || (($chiwalking_certification == "yes") && ($chirunning_certification == "no"))) {
+				// $marker_icon = esc_url( plugins_url('images/pin-chiwalking-instructor.png', __FILE__ ) );
+			// }
+			// else {
+				// switch ($certification_level) {
+					// case "Certified Instructor":
+						// $marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
+						// break;
+					// case "Senior Instructor":
+						// $marker_icon = esc_url( plugins_url('images/pin-senior-instructor.png', __FILE__ ) );
+						// break;
+					// case "Master Instructor":
+						// $marker_icon = esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) );
+						// break;
+					// default:
+						// $marker_icon = "";
+				// }
+			// }
+		// } */
+
+        // if( $location['lat'] && $location['lng'] ) :
+			// $html .= '<div id="marker-' . $instructor_nicename . '" class="marker" data-lat="' . $location["lat"] . '" data-lng="' . $location["lng"] . '" data-marker="' . $marker_icon . '">';
+			// $html .= '<div id="' . $instructor_nicename . '" class="madcow-instructors-map-marker">';
+			// //$html .= '<div id="' . $instructor_nicename . '-photo" class="madcow-instructors-map-marker-left">';
+			// //$html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
+			// $html .= '</div>';
+			// //$html .= '<div id="' . $instructor_nicename . '-details" class="madcow-instructors-map-marker-right">';
+			// //$html .= '<h5><a href="/instructor/' . $instructor_nicename . '/" class="madcow-instructors-map-marker-name-link">' . $instructor_name . '</a></h5>';
+			// //$html .= '<p>' . $certification_level . ' / ' . $regional_director . '</p>';
+			// $html .= '</div>';
+			// $html .= '<div style="clear:both"></div>';
+			// $html .= '</div>';
+			// $html .= '</div>';
+        // endif;
+    // endforeach;
+    // $html .= '</div><!-- end acf map -->';
+
+	$html = "Workshop Map";
+	
+    return $html;
+}
+
+function madcow_instructors_get_workshops() {
+	
+}
