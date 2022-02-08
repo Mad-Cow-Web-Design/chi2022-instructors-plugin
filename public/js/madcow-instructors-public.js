@@ -48,7 +48,7 @@
         // Create gerenic map.
         var mapArgs = {
             minZoom: 2,
-            maxZoom: 9,
+            maxZoom: 10,
             //zoom: $el.data('zoom') || 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
