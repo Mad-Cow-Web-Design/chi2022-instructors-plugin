@@ -78,7 +78,7 @@ function instructor_map() {
 			$html .= '<p>' . $certification_level . '</p>';
 			$html .= '</div>';
 			$html .= '<div style="clear:both"></div>';
-			$html .= '<a href="' . home_url('/') . 'instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-button "madcow-instructors-infowindow-button"><span>VIEW PROFILE &amp; WORKSHOPS</span></a>';
+			$html .= '<a href="' . home_url('/') . 'instructor/' . $instructor_nicename . '/" class="madcow-instructors-list-button madcow-instructors-infowindow-button"><span>VIEW PROFILE &amp; WORKSHOPS</span></a>';
 			$html .= '</div>';
 			$html .= '</div>';
         endif;
