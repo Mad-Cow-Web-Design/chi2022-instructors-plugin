@@ -20,18 +20,6 @@
  * @subpackage Madcow_Instructors/admin
  * @author     Your Name <email@example.com>
  */
- 
-if( is_admin() ){
-    remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
-    add_action( 'personal_options', 'prefix_hide_personal_options' );
-}
-function prefix_hide_personal_options() { ?>
-    <script type="text/javascript">
-        jQuery( document ).ready(function( $ ){
-            $( '#your-profile .form-table:first, #your-profile h3:first, .yoast, .user-description-wrap, .user-profile-picture, h2, .user-pinterest-wrap, .user-myspace-wrap, .user-soundcloud-wrap, .user-tumblr-wrap, .user-wikipedia-wrap, #application-passwords-section' ).remove();
-        } );
-    </script>
-<?php }
 
 //Make "subscriber/author" slug/url be "instructor"
 add_action('init', 'new_author_base');
