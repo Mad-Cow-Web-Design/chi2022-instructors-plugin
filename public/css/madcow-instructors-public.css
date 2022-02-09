@@ -43,3 +43,15 @@
 .workshops-map-legend div figure img {
     padding-right: 5px;
 }
+
+.gm-style-iw {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-bottom: 20px !important;
+    padding-top: 20px !important;
+}
+
+.gm-style-iw-d {
+    overflow: initial !important;
+    max-height: initial !important;
+}
