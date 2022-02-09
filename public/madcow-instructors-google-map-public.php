@@ -267,9 +267,9 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 
 		//Check for username, nicename, firstname, lastname, email, city, state/province
 		//This should have the state long and short names and it should also use strpos for comparison since we are not using any other wildcard method or regex
-		if(($username == $search_query) || ($nicename == $search_query) || ($firstname == $search_query) || ($lastname == $search_query) || ($email == $search_query) || ($city == $search_query) || ($state == $search_query)) {
+		/* if(($username == $search_query) || ($nicename == $search_query) || ($firstname == $search_query) || ($lastname == $search_query) || ($email == $search_query) || ($city == $search_query) || ($state == $search_query)) {
 			$temp[] = $instructor;
-		}
+		} */
 		
 		//Check for Country long name and Country Short Name
 		if($location['country'] || $location['country_short']) {
