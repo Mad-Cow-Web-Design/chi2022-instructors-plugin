@@ -123,7 +123,7 @@ function madcow_instructors_show_map_legend() {
 			echo '</figure>';
 			echo 'CHIWALKING</br>CERTIFIED INSTRUCTOR';
 		echo '</div>';
-	echo '</div><h1 class="inst-map-title">Find an Instructor</h1>';
+	echo '</div>';
 }
 
 function madcow_instructors_show_instructors_search_filter($show_country_list_filter = null, $show_certification_filter = null, $show_level_filter = null, $show_search = null) {
