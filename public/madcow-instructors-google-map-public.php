@@ -699,22 +699,32 @@ function workshop_map() {
 		$workshop_slug = esc_html( $workshop->post_name );
 		$workshop_name = get_field('name', $workshop_id);
         $location = get_field('location', $workshop_id);
+		$types = get_the_terms( $workshop->ID, 'workshop_type');
+		if ( ! empty( $types ) && ! is_wp_error( $types ) ) {
+			$workshop_types = wp_list_pluck( $types, 'slug' );
+		}
 
-		//$marker_icon = "";
+		$marker_icon = "";
 		
-		/* switch ($certification_level) {
-			case "Certified Instructor":
+		switch ($workshop_types[0]) {
+			case "chirunning-clinic":
 				$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
 				break;
-			case "Senior Instructor":
-				$marker_icon = esc_url( plugins_url('images/pin-senior-instructor.png', __FILE__ ) );
+			case "chirunning-tune-up":
+				$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
 				break;
-			case "Master Instructor":
+			case "chirunning-workshop":
+				$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
+				break;
+			case "chiwalk-run-workshop":
 				$marker_icon = esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) );
+				break;
+			case "chiwalking-workshop":
+				$marker_icon = esc_url( plugins_url('/images/pin-chiwalking-instructor.png', __FILE__ ) );
 				break;
 			default:
 				$marker_icon = "";
-		} */
+		}
 
         if( $location['lat'] && $location['lng'] ) :
 			$html .= '<div id="marker-' . $workshop_name . '" class="marker" data-lat="' . $location["lat"] . '" data-lng="' . $location["lng"] . '"';
