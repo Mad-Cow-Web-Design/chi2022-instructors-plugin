@@ -243,31 +243,47 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		Country - based on countries with instructors
 		Search */
 
-	$countries = get_all_countries();
+	$countries = get_all_countries();	
+	
+	//Get All Instructors
+	$instructors = get_users( array( 'role__in' => array( 'instructor' ) ) );
 
-	$search_query = '*' . $search_query . '*';
+	//Set up $temp array for holding filtered results
+	$temp = array();	
 
-	$instructors = get_users( array( 'role__in' => array( 'instructor' ), 'search' => $search_query ) );
+	//Loop through all Instructors and search / filter
+	foreach ( $instructors as $instructor ) :
+		$instructor_id = 'user_'. esc_html( $instructor->ID );
+		$location = get_field('location', $instructor_id);
+		$instructor_data = = get_userdata($instructor_id);
+		$username = $instructor_data->user_login;
+		$nicename = $instructor_data->user_nicename;
+		$firstname = $instructor_data->first_name;
+		$lastname = $instructor_data->last_name;
+		$email = $instructor_data->user_email;
+		$city = $location['city'];
+		$state = $location['state'];
 
-	if(isset($country_list_filter) && $country_list_filter !== "") {
-		//Set up $temp array for holding new results
-		$temp = array();
-
-		foreach ( $instructors as $instructor ) :
-			$instructor_id = 'user_'. esc_html( $instructor->ID );
-			$location = get_field('location', $instructor_id);
-
-			if($location['country'] || $location['country_short']) {
+		//Check for username, nicename, firstname, lastname, email, city, state/province
+		//This should have the state long and short names and it should also use strpos for comparison since we are not using any other wildcard method or regex
+		if(($username == $search_query) || ($nicename == $search_query) || ($firstname == $search_query) || ($lastname == $search_query) || ($email == $search_query) || ($city == $search_query) || ($state == $search_query)) {
+			$temp[] = $instructor;
+		}
+		
+		//Check for Country long name and Country Short Name
+		if($location['country'] || $location['country_short']) {
+			//Find the short name of the country from the long name, helps to standardize data
 			$key = array_search($location['country'], $countries);
-				//if($key == $country_list_filter || $location['country'] == $country_list_filter) {
-				if((strpos($key,$country_list_filter) === 0) || (strpos($location['country'],$country_list_filter) === 0)) {
-					$temp[] = $instructor;
-				}
+			
+			//Use strpos instead of regex for performance and in case the full name of the country has missing parts ie: United States / United States of America
+			if((strpos($key,$country_list_filter) === 0) || (strpos($location['country'],$country_list_filter) === 0) || (strpos($search_query,$country_list_filter) === 0)) {
+				$temp[] = $instructor;
 			}
-		endforeach;
-		$instructors = $temp;
-	}
+		}
+	endforeach;
+	$instructors = $temp;
 
+	//Set up for later use if desired
 	switch($certification_filter) {
 		case "chirunning":
 			break;
@@ -276,6 +292,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		default:
 	}
 
+	//Set up for later use if desired
 	switch($level_filter) {
 		case "certified_instructor":
 			break;
