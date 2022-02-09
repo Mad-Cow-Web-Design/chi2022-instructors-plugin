@@ -69,45 +69,35 @@
 	
 	var infoWindows = [];
 
-    /**
-     * initMarker
-     *
-     * Creates a marker for the given jQuery element and map.
-     *
-     * @date    22/10/19
-     * @since   5.8.6
-     *
-     * @param   jQuery $el The jQuery element.
-     * @param   object The map instance.
-     * @return  object The marker instance.
-     */
-    function initMarker($marker, map) {
+	function initMarker( $marker, map ) {
 
-        // Get position from marker.
-        var lat = $marker.data('lat');
-        var lng = $marker.data('lng');
-        var latLng = {
-            lat: parseFloat(lat),
-            lng: parseFloat(lng)
-        };
+		// Get position from marker.
+		var lat = $marker.data('lat');
+		var lng = $marker.data('lng');
+		var latLng = {
+			lat: parseFloat( lat ),
+			lng: parseFloat( lng )
+		};
 
-        // Create marker instance.
-        var marker = new google.maps.Marker({
-            position: latLng,
-            map: map,
-            icon: $marker.attr('data-marker')
-        });
-        // Append to reference for later use.
-        map.markers.push(marker);
+		// Create marker instance.
+		var marker = new google.maps.Marker({
+			position : latLng,
+			map: map
+		});
 
-        // If marker contains HTML, add it to an infoWindow.
-        if ($marker.html()) {
+		// Append to reference for later use.
+		map.markers.push( marker );
 
-            // Create info window.
-            var infowindow = new google.maps.InfoWindow({
-                content: $marker.html()
-            });
-			
+		// If marker contains HTML, add it to an infoWindow.
+		if( $marker.html() ){
+
+			// Create info window.
+			var infoWindow = new google.maps.InfoWindow({
+				content: $marker.html()
+			});
+
+			infoWindows.push(infoWindow);
+
 			// Show info window when marker is clicked.
 			google.maps.event.addListener(marker, 'click', function() {
 
@@ -122,8 +112,8 @@
 			google.maps.event.addListener(map, 'click', function() {
 				infoWindow.close();
 			});
-        }
-    }
+		}
+	}
 
     /**
      * centerMap
