@@ -34,3 +34,12 @@
 .workshops-map-legend-item:not(:last-child) {
     padding-right: 70px;
 }
+
+.workshops-map-legend div figure {
+    height: 24px;
+    width: 24px;
+}
+
+.workshops-map-legend div figure img {
+    padding-right: 5px;
+}
