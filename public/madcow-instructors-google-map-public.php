@@ -692,7 +692,7 @@ function workshop_map() {
 
 	$workshops = madcow_instructors_get_workshops();
 	
-    $html = '<div id="madcow-instructors-find-a-workshop" class="acf-map madcow-instructors-google-map madcow-instructors-workshop-map" data-zoom="16">';
+    $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map madcow-instructors-workshop-map" data-zoom="16">';
     foreach ( $workshops as $workshop ) :
         // Creating the var workshop_id to use with ACF Pro
         $workshop_id = esc_html( $workshop->ID );
