@@ -788,20 +788,21 @@ function madcow_workshops_show_map_legend() {
 }
 
 function madcow_instructors_get_workshops() {
-	return get_posts( array(
-						'posts_per_page' => -1,
-						'post_type' => 'workshops',
-						'meta_key'  => 'start_date_&_time',
-						'orderby'   => 'meta_value',
-						'order'     => 'ASC',
-						'meta_type' => 'DATETIME',
-						'meta_query' => array(
-							array(
-							'key'		=> 'start_date_&_time',
-							'compare'	=> '>=',
-							'value'       => $date_now,
-							'type' => 'DATETIME'
-							),
+	$workshops = get_posts( array(
+					'posts_per_page' => -1,
+					'post_type' => 'workshops',
+					'meta_key'  => 'start_date_&_time',
+					'orderby'   => 'meta_value',
+					'order'     => 'ASC',
+					'meta_type' => 'DATETIME',
+					'meta_query' => array(
+						array(
+						'key'		=> 'start_date_&_time',
+						'compare'	=> '>=',
+						'value'       => $date_now,
+						'type' => 'DATETIME'
 						),
-					) );
+					),
+				) );
+	return $workshops;
 }
