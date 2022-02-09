@@ -44,7 +44,7 @@ function instructor_map() {
 		$marker_icon = "";
 
 		if($regional_director === "yes") {
-			$marker_icon = esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) );
+			$marker_icon = esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) );
 		}
 		else {
 			if((isset($chiwalking_certification) && !isset($chirunning_certification)) || (($chiwalking_certification == "yes") && ($chirunning_certification == "no"))) {
@@ -59,7 +59,7 @@ function instructor_map() {
 						$marker_icon = esc_url( plugins_url('images/pin-senior-instructor.png', __FILE__ ) );
 						break;
 					case "Master Instructor":
-						$marker_icon = esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) );
+						$marker_icon = esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) );
 						break;
 					default:
 						$marker_icon = "";
@@ -106,14 +106,14 @@ function madcow_instructors_show_map_legend() {
 
 		echo '<div class="running-legend">';
 			echo '<figure>';
-			echo '<img src="' . esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) ) . '" />';
+			echo '<img src="' . esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
 			echo 'CHIRUNNING</br>MASTER INSTRUCTOR';
 		echo '</div>';
 
 		echo '<div class="running-legend">';
 			echo '<figure>';
-			echo '<img src="' . esc_url( plugins_url('images/pin-regional-director.png', __FILE__ ) ) . '" />';
+			echo '<img src="' . esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
 			echo 'CHILIVING</br>REGIONAL DIRECTOR';
 		echo '</div>';
