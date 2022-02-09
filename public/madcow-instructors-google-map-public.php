@@ -746,22 +746,30 @@ function workshop_map() {
 }
 
 function madcow_workshops_show_map_legend() {
- 	echo '<div class="workshops-map-legend">';
-		echo '<div class="workshops-map-legend-item">';
+ 	echo '<div class="map-legend">';
+		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
 			echo 'CHIRUNNING EVENTS';
 		echo '</div>';
 
-		echo '<div class="workshops-map-legend-item">';
+		echo '<div class="running-legend">';
+			echo '&nbsp;';
+		echo '</div>';
+
+		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
 			echo 'CHIWALK-RUN EVENTS';
 		echo '</div>';
 
-		echo '<div class="workshops-map-legend-item">';
+		echo '<div class="running-legend">';
+			echo '&nbsp;';
+		echo '</div>';
+
+		echo '<div class="walking-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chiwalking-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
