@@ -66,6 +66,8 @@
         // Return map instance.
         return map;
     }
+	
+	var infoWindows = [];
 
     /**
      * initMarker
@@ -105,11 +107,21 @@
             var infowindow = new google.maps.InfoWindow({
                 content: $marker.html()
             });
+			
+			// Show info window when marker is clicked.
+			google.maps.event.addListener(marker, 'click', function() {
 
-            // Show info window when marker is clicked.
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map, marker);
-            });
+				//close all
+				for (var i = 0; i < infoWindows.length; i++) {
+					infoWindows[i].close();
+				}
+				infoWindow.open( map, marker );
+
+			});
+
+			google.maps.event.addListener(map, 'click', function() {
+				infoWindow.close();
+			});
         }
     }
 
