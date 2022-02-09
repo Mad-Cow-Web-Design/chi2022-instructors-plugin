@@ -693,9 +693,6 @@ function workshop_map() {
 			$html .= '<p>' . $workshop_name . '</p>';
 			$html .= '</div>';
 			$html .= '</div>';
-			$html .= '<div style="clear:both"></div>';
-			$html .= '</div>';
-			$html .= '</div>';
         endif;
     endforeach;
     $html .= '</div><!-- end acf map -->';
