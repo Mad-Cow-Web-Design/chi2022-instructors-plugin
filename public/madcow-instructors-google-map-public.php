@@ -735,7 +735,7 @@ function workshop_map() {
 }
 
 function madcow_workshops_show_map_legend() {
-	echo '<div class="map-legend">';
+/* 	echo '<div class="map-legend">';
 		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) ) . '" />';
@@ -764,7 +764,7 @@ function madcow_workshops_show_map_legend() {
 			echo '</figure>';
 			echo 'CHIWALKING</br>EVENTS';
 		echo '</div>';
-	echo '</div>';
+	echo '</div>'; */
 }
 
 function madcow_instructors_get_workshops() {
