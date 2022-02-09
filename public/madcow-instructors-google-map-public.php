@@ -704,5 +704,5 @@ function workshop_map() {
 }
 
 function madcow_instructors_get_workshops() {
-	return get_posts(array('post_type' => 'workshops'));
+	return get_posts(array('post_type' => 'workshops', 'numberposts' => -1));
 }
