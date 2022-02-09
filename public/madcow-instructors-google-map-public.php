@@ -699,18 +699,7 @@ function workshop_map() {
         $workshop_id = esc_html( $workshop->ID );
 		$workshop_slug = esc_html( $workshop->post_name );
 		$workshop_name = get_field('name', $workshop_id);
-		
-		// $workshop_instructor_id = get_field('instructor', $workshop_id);
-		// $workshop_instructor = get_user_by('id', $workshop_instructor_id);
-		// $workshop_instructor_name = $workshop_instructor->display_name;
-        
-		// $location = get_field('location', $workshop_id);
-		
-		// $workshop_start_date = get_field('start_date_&_time', $workshop_id);
-		// $workshop_start_date = new DateTime($workshop_start_date);
-		
-		// $workshop_venue = get_field('venue', $workshop_id);
-		
+        $location = get_field('location', $workshop_id);
 		$types = get_the_terms( $workshop->ID, 'workshop_type');
 		if ( ! empty( $types ) && ! is_wp_error( $types ) ) {
 			$workshop_types = wp_list_pluck( $types, 'slug' );
@@ -747,11 +736,8 @@ function workshop_map() {
 			$html .= '<div id="' . $workshop_name . '" class="madcow-instructors-workshops-map-marker">';
 			$html .= '<h5><a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-map-marker-name-link">' . $workshop_name . '</a></h5>';
 			//Add Instructor
-			//$html .= '<p>' . $workshop_instructor_name . '</p>';
 			//Add date/time
-			//$html .= '<p>' . $workshop_start_date . '</p>';
 			//Add venue
-			//$html .= '<p>' . $workshop_venue . '</p>';
 			$html .= '<a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-list-button madcow-instructors-infowindow-button"><span>VIEW WORKSHOP</span></a>';
 			$html .= '</div>';
 			$html .= '</div>';
@@ -788,23 +774,20 @@ function madcow_workshops_show_map_legend() {
 }
 
 function madcow_instructors_get_workshops() {
-	/* $workshops = get_posts( array(
-		'posts_per_page' => -1,
-		'post_type' => 'workshops',
-		'meta_key'  => 'start_date_&_time',
-		'orderby'   => 'meta_value',
-		'order'     => 'ASC',
-		'meta_type' => 'DATETIME',
-		'meta_query' => array(
-			array(
-			'key'		=> 'start_date_&_time',
-			'compare'	=> '>=',
-			'value'       => $date_now,
-			'type' => 'DATETIME'
-			),
-		),
-	) ); */
-				
-	$workshops = get_posts(array('post_type' => 'workshops', 'numberposts' => -1));
-	return $workshops;
+	return get_posts( array(
+        'posts_per_page' => -1,
+        'post_type' => 'workshops',
+        'meta_key'  => 'start_date_&_time',
+        'orderby'   => 'meta_value',
+        'order'     => 'ASC',
+        'meta_type' => 'DATETIME',
+        'meta_query' => array(
+            array(
+            'key'		=> 'start_date_&_time',
+            'compare'	=> '>=',
+            'value'       => $date_now,
+            'type' => 'DATETIME'
+            ),
+       ),
+    ) );
 }
