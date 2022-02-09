@@ -675,12 +675,11 @@ function workshop_map() {
 
 	$workshops = madcow_instructors_get_workshops();
 	
-	echo var_dump($workshops);
-	
     $html = '<div id="madcow-instructors-find-a-workshop" class="acf-map madcow-instructors-google-map madcow-instructors-workshop-map" data-zoom="16">';
     foreach ( $workshops as $workshop ) :
         // Creating the var workshop_id to use with ACF Pro
         $workshop_id = esc_html( $workshop->ID );
+		$workshop_slug = esc_html( $workshop->post_name );
 		$workshop_name = get_field('name', $workshop_id);
         $location = get_field('location', $workshop_id);
 
@@ -694,6 +693,7 @@ function workshop_map() {
 			$html .= '>';
 			$html .= '<div id="' . $workshop_name . '" class="madcow-instructors-workshops-map-marker">';
 			$html .= '<p>' . $workshop_name . '</p>';
+			$html .= '<a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-list-button"><span>VIEW WORKSHOP</span></a>';
 			$html .= '</div>';
 			$html .= '</div>';
         endif;
