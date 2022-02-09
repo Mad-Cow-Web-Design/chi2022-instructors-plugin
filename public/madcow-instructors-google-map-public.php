@@ -740,7 +740,7 @@ function madcow_workshops_show_map_legend() {
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo 'CHIRUNNING</br>EVENTS';
+			echo 'CHIRUNNING EVENTS';
 		echo '</div>';
 
 		echo '<div class="running-legend">';
@@ -751,7 +751,7 @@ function madcow_workshops_show_map_legend() {
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo 'CHIWALK-RUN</br>EVENTS';
+			echo 'CHIWALK-RUN EVENTS';
 		echo '</div>';
 
 		echo '<div class="running-legend">';
@@ -762,7 +762,7 @@ function madcow_workshops_show_map_legend() {
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chiwalking-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo 'CHIWALKING</br>EVENTS';
+			echo 'CHIWALKING EVENTS';
 		echo '</div>';
 	echo '</div>';
 }
