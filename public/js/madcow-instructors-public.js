@@ -82,7 +82,8 @@
 		// Create marker instance.
 		var marker = new google.maps.Marker({
 			position : latLng,
-			map: map
+			map: map,
+            icon: $marker.attr('data-marker')
 		});
 
 		// Append to reference for later use.
