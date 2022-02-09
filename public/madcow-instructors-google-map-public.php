@@ -723,7 +723,7 @@ function workshop_map() {
 			}
 			$html .= '>';
 			$html .= '<div id="' . $workshop_name . '" class="madcow-instructors-workshops-map-marker">';
-			$html .= '<p>' . $workshop_name . '</p>';
+			$html .= '<h5><a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-map-marker-name-link">' . $workshop_name . '</a></h5>';
 			$html .= '<a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-list-button"><span>VIEW WORKSHOP</span></a>';
 			$html .= '</div>';
 			$html .= '</div>';
