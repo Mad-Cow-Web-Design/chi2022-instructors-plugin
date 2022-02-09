@@ -720,6 +720,39 @@ function workshop_map() {
     return $html;
 }
 
+function madcow_workshops_show_map_legend() {
+	echo '<div class="map-legend">';
+		echo '<div class="running-legend">';
+			echo '<figure>';
+			echo '<img src="' . esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) ) . '" />';
+			echo '</figure>';
+			echo 'CHIRUNNING</br>EVENTS';
+		echo '</div>';
+
+		echo '<div class="running-legend">';
+			echo '&nbsp;';
+		echo '</div>';
+
+		echo '<div class="running-legend">';
+			echo '<figure>';
+			echo '<img src="' . esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) ) . '" />';
+			echo '</figure>';
+			echo 'CHIWALK-RUN</br>EVENTS';
+		echo '</div>';
+
+		echo '<div class="running-legend">';
+			echo '&nbsp;';
+		echo '</div>';
+
+		echo '<div class="walking-legend">';
+			echo '<figure>';
+			echo '<img src="' . esc_url( plugins_url('images/pin-chiwalking-instructor.png', __FILE__ ) ) . '" />';
+			echo '</figure>';
+			echo 'CHIWALKING</br>EVENTS';
+		echo '</div>';
+	echo '</div>';
+}
+
 function madcow_instructors_get_workshops() {
 	return get_posts(array('post_type' => 'workshops', 'numberposts' => -1));
 }
