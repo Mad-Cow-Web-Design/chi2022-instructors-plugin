@@ -701,6 +701,20 @@ function workshop_map() {
         $location = get_field('location', $workshop_id);
 
 		//$marker_icon = "";
+		
+		/* switch ($certification_level) {
+			case "Certified Instructor":
+				$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
+				break;
+			case "Senior Instructor":
+				$marker_icon = esc_url( plugins_url('images/pin-senior-instructor.png', __FILE__ ) );
+				break;
+			case "Master Instructor":
+				$marker_icon = esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) );
+				break;
+			default:
+				$marker_icon = "";
+		} */
 
         if( $location['lat'] && $location['lng'] ) :
 			$html .= '<div id="marker-' . $workshop_name . '" class="marker" data-lat="' . $location["lat"] . '" data-lng="' . $location["lng"] . '"';
