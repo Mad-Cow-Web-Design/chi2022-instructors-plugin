@@ -255,7 +255,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 	foreach ( $instructors as $instructor ) :
 		$instructor_id = 'user_'. esc_html( $instructor->ID );
 		$location = get_field('location', $instructor_id);
-		$instructor_data = = get_userdata($instructor_id);
+		$instructor_data = get_userdata($instructor_id);
 		$username = $instructor_data->user_login;
 		$nicename = $instructor_data->user_nicename;
 		$firstname = $instructor_data->first_name;
@@ -735,7 +735,7 @@ function workshop_map() {
 }
 
 function madcow_workshops_show_map_legend() {
-/* 	echo '<div class="map-legend">';
+ 	echo '<div class="map-legend">';
 		echo '<div class="running-legend">';
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) ) . '" />';
@@ -764,7 +764,7 @@ function madcow_workshops_show_map_legend() {
 			echo '</figure>';
 			echo 'CHIWALKING</br>EVENTS';
 		echo '</div>';
-	echo '</div>'; */
+	echo '</div>';
 }
 
 function madcow_instructors_get_workshops() {
