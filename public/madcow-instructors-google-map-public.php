@@ -674,6 +674,9 @@ function madcow_instructors_update_instructor_country($user_id) {
 function workshop_map() {
 
 	$workshops = madcow_instructors_get_workshops();
+	
+	echo var_dump($workshops);
+	
     $html = '<div id="madcow-instructors-find-a-workshop" class="acf-map madcow-instructors-google-map madcow-instructors-workshop-map" data-zoom="16">';
     foreach ( $workshops as $workshop ) :
         // Creating the var workshop_id to use with ACF Pro
