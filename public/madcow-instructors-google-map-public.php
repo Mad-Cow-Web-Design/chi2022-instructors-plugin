@@ -115,7 +115,7 @@ function madcow_instructors_show_map_legend() {
 			echo '<figure>';
 			echo '<img src="' . esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) ) . '" />';
 			echo '</figure>';
-			echo 'CHILIVING</br>REGIONAL DIRECTOR';
+			echo 'REGIONAL DIRECTOR';
 		echo '</div>';
 
 		echo '<div class="walking-legend">';
