@@ -245,87 +245,91 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 	//Get All Instructors
 	$instructors = get_users( array( 'role__in' => array( 'instructor' ) ) );
 
-	//Set up $temp array for holding filtered results
-	$temp = array();
+	//If there is a search value or any filter values, otherwise return the full list
+	if(isset($search_query) && $search_query !== "") {
 
-	//Loop through all Instructors and search / filter
-	foreach ( $instructors as $instructor ) :
-		$instructor_id = 'user_'. esc_html( $instructor->ID );
-		$location = get_field('location', $instructor_id);
-		$instructor_data = get_userdata('id', $instructor_id);
-		$username = $instructor_data->user_login;
-		$nicename = $instructor_data->user_nicename;
-		$firstname = $instructor_data->first_name;
-		$lastname = $instructor_data->last_name;
-		$email = $instructor_data->user_email;
-		$city = $location['city'];
-		$state = $location['state'];
-		
-		if(isset($search_query) && $search_query !== "") {
-			//Check for search match against various fields
-			//search_query is already in all lower case
-			if(strpos(strtolower($firstname), $search_query) !== FALSE) {
-				$temp[] = $instructor;
-			}
-			/* elseif(strpos(strtolower($lastname), $search_query) !== FALSE) {
-				$temp[] = $instructor;
-			}
-			elseif(strpos(strtolower($city), $search_query) !== FALSE) {
-				$temp[] = $instructor;
-			}
-			//This should have the state long and short names
-			elseif(strpos(strtolower($state), $search_query) !== FALSE) {
-				$temp[] = $instructor;
-			} */
-			/* elseif(strpos(strtolower($username), $search_query) !== FALSE) {
-				$temp[] = $instructor;
-			}
-			/* elseif(strpos(strtolower($nicename), $search_query) !== FALSE) {
-				$temp[] = $instructor;
-			} */
-			/* elseif(strpos(strtolower($email), $search_query) !== FALSE) {
-				$temp[] = $instructor;
-			} */
-			else {}
-		}
-		
-		if($country_list_filter !== "") {
-			//Check for Country long name and Country Short Name stored in ACF
-			if($location['country'] || $location['country_short']) {
-				//Find the short name of the country from the long name, helps to standardize data
-				$key = array_search($location['country'], $countries);
-				
-				//Use strpos instead of regex for performance and in case the full name of the country has missing parts ie: United States / United States of America
-				//Check against uppercase versions of everything to normalize
-				//if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($search_query),strtoupper($country_list_filter)) !== FALSE)) {
-				if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE)) {
+		//Set up $temp array for holding filtered results
+		$temp = array();
+
+		//Loop through all Instructors and search / filter
+		foreach ( $instructors as $instructor ) :
+			$instructor_id = 'user_'. esc_html( $instructor->ID );
+			$location = get_field('location', $instructor_id);
+			$instructor_data = get_userdata('id', $instructor_id);
+			$username = $instructor_data->user_login;
+			$nicename = $instructor_data->user_nicename;
+			$firstname = $instructor_data->first_name;
+			$lastname = $instructor_data->last_name;
+			$email = $instructor_data->user_email;
+			$city = $location['city'];
+			$state = $location['state'];
+			
+			if(isset($search_query) && $search_query !== "") {
+				//Check for search match against various fields
+				//search_query is already in all lower case
+				if(strpos(strtolower($firstname), $search_query) !== FALSE) {
 					$temp[] = $instructor;
 				}
+				/* elseif(strpos(strtolower($lastname), $search_query) !== FALSE) {
+					$temp[] = $instructor;
+				}
+				elseif(strpos(strtolower($city), $search_query) !== FALSE) {
+					$temp[] = $instructor;
+				}
+				//This should have the state long and short names
+				elseif(strpos(strtolower($state), $search_query) !== FALSE) {
+					$temp[] = $instructor;
+				} */
+				/* elseif(strpos(strtolower($username), $search_query) !== FALSE) {
+					$temp[] = $instructor;
+				}
+				/* elseif(strpos(strtolower($nicename), $search_query) !== FALSE) {
+					$temp[] = $instructor;
+				} */
+				/* elseif(strpos(strtolower($email), $search_query) !== FALSE) {
+					$temp[] = $instructor;
+				} */
+				else {}
 			}
-		}
-	endforeach;
-	$instructors = $temp;
+			
+			if($country_list_filter !== "") {
+				//Check for Country long name and Country Short Name stored in ACF
+				if($location['country'] || $location['country_short']) {
+					//Find the short name of the country from the long name, helps to standardize data
+					$key = array_search($location['country'], $countries);
+					
+					//Use strpos instead of regex for performance and in case the full name of the country has missing parts ie: United States / United States of America
+					//Check against uppercase versions of everything to normalize
+					//if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($search_query),strtoupper($country_list_filter)) !== FALSE)) {
+					if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE)) {
+						$temp[] = $instructor;
+					}
+				}
+			}
+			
+			/* //Set up for later use if desired
+			switch($certification_filter) {
+				case "chirunning":
+					break;
+				case "chiwalking":
+					break;
+				default:
+			}
 
-	//Set up for later use if desired
-	switch($certification_filter) {
-		case "chirunning":
-			break;
-		case "chiwalking":
-			break;
-		default:
-	}
-
-	//Set up for later use if desired
-	switch($level_filter) {
-		case "certified_instructor":
-			break;
-		case "senior_instructor":
-			break;
-		case "master_instructor":
-			break;
-		case "regional_director":
-			break;
-		default:
+			//Set up for later use if desired
+			switch($level_filter) {
+				case "certified_instructor":
+					break;
+				case "senior_instructor":
+					break;
+				case "master_instructor":
+					break;
+				case "regional_director":
+					break;
+				default:
+			} */
+		endforeach;
+		$instructors = $temp;
 	}
 
 	return $instructors;
