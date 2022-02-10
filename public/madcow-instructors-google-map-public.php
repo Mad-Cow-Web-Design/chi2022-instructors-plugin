@@ -266,17 +266,6 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 			$lastname = $instructor_data->last_name;
 			$email = $instructor_data->user_email;
 			
-			echo '<script>';
-			echo 'console.log("Search Query: ' . $search_query . '");';
-			echo 'console.log("ID: ' . $instructor->ID . '");';
-			echo 'console.log("Instructor ID: ' . $instructor_id . '");';
-			echo 'console.log("First Name: ' . $firstname . '");';
-			echo 'console.log("Last Name: ' . $lastname . '");';
-			echo 'console.log("Username: ' . $username . '");';
-			echo 'console.log("Nicename: ' . $nicename . '");';
-			echo 'console.log("Email: ' . $email . '");';
-			echo '</script>';
-			
 			if(isset($search_query) && $search_query !== "") {
 				//Check for search match against various fields
 				//search_query is already in all lower case
