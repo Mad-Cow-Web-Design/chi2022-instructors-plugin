@@ -24,7 +24,7 @@
 function instructor_map() {
 	//Get Instructors
 	$instructors = madcow_instructors_get_instructors("", "", "", "");
-	
+
 	//Begin HTML for Map
     $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map" data-zoom="16">';
     foreach ( $instructors as $instructor ) :
@@ -201,12 +201,14 @@ function madcow_instructors_show_instructors_list() {
 
 		$html .= '<div class="madcow-instructor-list-item">';
 		$html .= '<article class="madcow-instructor-list-item-article">';
+        $html .= '<a href="' . home_url('/') . 'instructor/' . $instructor_nicename . '/">';
         if($instructor_photo) {
             $html .= '<img class="instructor-photo" src="' . $instructor_photo . '">';
         }
         else {
 		    $html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
         }
+        $html .= '</a>';
 		$html .= '<h5>' . $instructor_name . '</h5>';
 		$html .= '<div class="certification-level">';
 		if($chirunning_certification == "yes") {
@@ -238,10 +240,10 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		$level_filter = $form_values["madcow-instructors-level-list-filter"];
 		$search_query = $form_values["madcow-instructors-search"];
 	}
-	
+
 	//Get all countries
-	$countries = get_all_countries();	
-	
+	$countries = get_all_countries();
+
 	//Get All Instructors
 	$instructors = get_users( array( 'role__in' => array( 'instructor' ) ) );
 
@@ -254,18 +256,18 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		//Loop through all Instructors and search / filter
 		foreach ( $instructors as $instructor ) :
 			$instructor_id = 'user_'. esc_html( $instructor->ID );
-			
+
 			$location = get_field('location', $instructor_id);
 			$city = $location['city'];
 			$state = $location['state'];
-			
+
 			$instructor_data = get_userdata($instructor->ID);
 			$username = $instructor_data->user_login;
 			$nicename = $instructor_data->user_nicename;
 			$firstname = $instructor_data->first_name;
 			$lastname = $instructor_data->last_name;
 			$email = $instructor_data->user_email;
-			
+
 			if(isset($search_query) && $search_query !== "") {
 				//Check for search match against various fields
 				//search_query is already in all lower case
@@ -293,13 +295,13 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 				} */
 				else {}
 			}
-			
+
 			if($country_list_filter !== "") {
 				//Check for Country long name and Country Short Name stored in ACF
 				if($location['country'] || $location['country_short']) {
 					//Find the short name of the country from the long name, helps to standardize data
 					$key = array_search($location['country'], $countries);
-					
+
 					//Use strpos instead of regex for performance and in case the full name of the country has missing parts ie: United States / United States of America
 					//Check against uppercase versions of everything to normalize
 					//if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($search_query),strtoupper($country_list_filter)) !== FALSE)) {
@@ -308,7 +310,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 					}
 				}
 			}
-			
+
 			/* //Set up for later use if desired
 			switch($certification_filter) {
 				case "chirunning":
@@ -348,7 +350,7 @@ function madcow_form_values() {
 		if($_POST["madcow-instructors-level-list-filter"] && $_POST["madcow-instructors-level-list-filter"] !== "") { $form_values["madcow-instructors-level-list-filter"] = $_POST["madcow-instructors-country_list_filter"]; } else { $form_values["madcow-instructors-level-list-filter"] = ""; }
 		if($_POST["madcow-instructors-search"] && $_POST["madcow-instructors-search"] !== "") { $form_values["madcow-instructors-search"] = strtolower($_POST["madcow-instructors-search"]); } else { $form_values["madcow-instructors-search"] = ""; }
 	}
-	
+
 	return $form_values;
 }
 
@@ -671,7 +673,7 @@ function get_all_countries() {
 		'ZM' => 'Zambia',
 		'ZW' => 'Zimbabwe',
 	);
-	
+
 	return $countries;
 }
 
@@ -735,7 +737,7 @@ function madcow_instructors_update_instructor_country($user_id) {
 function workshop_map() {
 
 	$workshops = madcow_instructors_get_workshops();
-	
+
     $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map madcow-instructors-workshop-map" data-zoom="16">';
     foreach ( $workshops as $workshop ) :
         // Creating the var workshop_id to use with ACF Pro
@@ -743,16 +745,16 @@ function workshop_map() {
 		$workshop_slug = esc_html( $workshop->post_name );
 		$workshop_name = get_field('name', $workshop_id);
         $location = get_field('location', $workshop_id);
-		
+
 		$workshop_instructor_id = get_field('instructor', $workshop_id);
 		$workshop_instructor = get_user_by('id', $workshop_instructor_id);
 		$workshop_instructor_name = $workshop_instructor->display_name;
-		
+
 		$workshop_start_date = get_field('start_date_&_time', $workshop_id);
 		//$workshop_start_date = new DateTime($workshop_start_date);
-		
+
 		$workshop_venue = get_field('venue', $workshop_id);
-		
+
 		//Determine map marker based on the type of Workshop
 		$types = get_the_terms( $workshop->ID, 'workshop_type');
 		if ( ! empty( $types ) && ! is_wp_error( $types ) ) {
@@ -760,7 +762,7 @@ function workshop_map() {
 		}
 
 		$marker_icon = "";
-		
+
 		switch ($workshop_types[0]) {
 			case "chirunning-clinic":
 				$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
@@ -801,7 +803,7 @@ function workshop_map() {
         endif;
     endforeach;
     $html .= '</div><!-- end acf map -->';
-	
+
     return $html;
 }
 
