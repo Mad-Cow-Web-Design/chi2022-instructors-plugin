@@ -708,7 +708,7 @@ function workshop_map() {
 		$workshop_start_date = get_field('start_date_&_time', $workshop_id);
 		//$workshop_start_date = new DateTime($workshop_start_date);
 		
-		//$workshop_venue = get_field('venue', $workshop_id);
+		$workshop_venue = get_field('venue', $workshop_id);
 		
 		//Determine map marker based on the type of Workshop
 		$types = get_the_terms( $workshop->ID, 'workshop_type');
@@ -751,7 +751,7 @@ function workshop_map() {
 			//Add date/time
 			$html .= '<p>' . $workshop_start_date . '</p>';
 			//Add venue
-			//$html .= '<p>' . $workshop_venue . '</p>';
+			$html .= '<p>' . $workshop_venue . '</p>';
 			$html .= '<a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-list-button madcow-instructors-infowindow-button"><span>VIEW WORKSHOP</span></a>';
 			$html .= '</div>';
 			$html .= '</div>';
