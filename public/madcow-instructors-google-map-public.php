@@ -255,7 +255,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		foreach ( $instructors as $instructor ) :
 			$instructor_id = 'user_'. esc_html( $instructor->ID );
 			$location = get_field('location', $instructor_id);
-			$instructor_data = get_userdata('id', $instructor_id);
+			$instructor_data = get_userdata('id', $instructor->ID);
 			$username = $instructor_data->user_login;
 			$nicename = $instructor_data->user_nicename;
 			$firstname = $instructor_data->first_name;
