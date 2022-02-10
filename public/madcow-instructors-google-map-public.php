@@ -240,7 +240,7 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
     return $html;
 }
 
-//Helper functions
+/* HELPER FUNCTIONS */
 
 //Returns list of instructors based on filters and search query, defaults to returning full list without filters or search query
 function madcow_instructors_get_instructors($country_list_filter = "", $certification_filter = "", $level_filter = "", $search_query = "") {
@@ -275,7 +275,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		if(strpos($search_query, $firstname) === 0) {
 			$temp[] = $instructor;
 		}
-		elseif(strpos($search_query, $lastname) === 0) {
+		/* elseif(strpos($search_query, $lastname) === 0) {
 			$temp[] = $instructor;
 		}
 		elseif(strpos($search_query, $city) === 0) {
@@ -284,7 +284,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		//This should have the state long and short names
 		elseif(strpos($search_query, $state) === 0) {
 			$temp[] = $instructor;
-		}
+		} */
 		/* elseif(strpos($search_query, $username) === 0) {
 			$temp[] = $instructor;
 		}
