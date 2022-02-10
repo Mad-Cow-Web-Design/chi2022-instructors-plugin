@@ -254,18 +254,27 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		//Loop through all Instructors and search / filter
 		foreach ( $instructors as $instructor ) :
 			$instructor_id = 'user_'. esc_html( $instructor->ID );
+			
 			$location = get_field('location', $instructor_id);
+			$city = $location['city'];
+			$state = $location['state'];
+			
 			$instructor_data = get_userdata('id', $instructor->ID);
 			$username = $instructor_data->user_login;
 			$nicename = $instructor_data->user_nicename;
 			$firstname = $instructor_data->first_name;
 			$lastname = $instructor_data->last_name;
 			$email = $instructor_data->user_email;
-			$city = $location['city'];
-			$state = $location['state'];
+			
 			echo '<script>';
 			echo 'console.log("Search Query: ' . $search_query . '");';
+			echo 'console.log("ID: ' . $instructor->ID . '");';
+			echo 'console.log("Instructor ID: ' . $instructor_id . '");';
 			echo 'console.log("First Name: ' . $firstname . '");';
+			echo 'console.log("Last Name: ' . $lastname . '");';
+			echo 'console.log("Username: ' . $username . '");';
+			echo 'console.log("Nicename: ' . $nicename . '");';
+			echo 'console.log("Email: ' . $email . '");';
 			echo '</script>';
 			
 			if(isset($search_query) && $search_query !== "") {
