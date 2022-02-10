@@ -263,6 +263,10 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 			$email = $instructor_data->user_email;
 			$city = $location['city'];
 			$state = $location['state'];
+			echo '<script>';
+			echo 'console.log("Search Query: ' . $search_query . '");';
+			echo 'console.log("First Name: ' . $firstname . '");';
+			echo '</script>';
 			
 			if(isset($search_query) && $search_query !== "") {
 				//Check for search match against various fields
