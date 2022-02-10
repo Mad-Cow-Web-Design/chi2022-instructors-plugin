@@ -256,7 +256,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 	foreach ( $instructors as $instructor ) :
 		$instructor_id = 'user_'. esc_html( $instructor->ID );
 		$location = get_field('location', $instructor_id);
-		$instructor_data = get_userdata($instructor_id);
+		$instructor_data = get_userdata('id', $instructor_id);
 		$username = $instructor_data->user_login;
 		$nicename = $instructor_data->user_nicename;
 		$firstname = $instructor_data->first_name;
@@ -267,11 +267,11 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 
 		//Check for username, nicename, firstname, lastname, email, city, state/province
 		//This should have the state long and short names and it should also use strpos for comparison since we are not using any other wildcard method or regex
-		/* if(($username == $search_query) || ($nicename == $search_query) || ($firstname == $search_query) || ($lastname == $search_query) || ($email == $search_query) || ($city == $search_query) || ($state == $search_query)) {
+		if(($username == $search_query) || ($nicename == $search_query) || ($firstname == $search_query) || ($lastname == $search_query) || ($email == $search_query) || ($city == $search_query) || ($state == $search_query)) {
 			$temp[] = $instructor;
-		} */
+		}
 		
-		//Check for Country long name and Country Short Name
+		//Check for Country long name and Country Short Name stored in ACF
 		if($location['country'] || $location['country_short']) {
 			//Find the short name of the country from the long name, helps to standardize data
 			$key = array_search($location['country'], $countries);
