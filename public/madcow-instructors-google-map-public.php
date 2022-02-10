@@ -701,9 +701,9 @@ function workshop_map() {
 		$workshop_name = get_field('name', $workshop_id);
         $location = get_field('location', $workshop_id);
 		
-		//$workshop_instructor_id = get_field('instructor', $workshop_id);
-		//$workshop_instructor = get_user_by('id', $workshop_instructor_id);
-		//$workshop_instructor_name = $workshop_instructor->display_name;
+		$workshop_instructor_id = get_field('instructor', $workshop_id);
+		$workshop_instructor = get_user_by('id', $workshop_instructor_id);
+		$workshop_instructor_name = $workshop_instructor->display_name;
         
 		//$location = get_field('location', $workshop_id);
 		
