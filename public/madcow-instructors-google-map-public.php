@@ -158,7 +158,13 @@ function madcow_instructors_show_instructors_search_filter($show_country_list_fi
 	}
 
 	if($show_search) {
-		echo '<label for="madcow-instructors-search"></label><input type="text" id="madcow-instructors-search" name="madcow-instructors-search" placeholder="Search Certified Instructors" />';
+		echo '<label for="madcow-instructors-search"></label><input type="text" id="madcow-instructors-search" name="madcow-instructors-search"';
+		if(isset($last_search) && $last_search !== "") {
+			echo ' value="'. $last_search . '" />';
+		}
+		else {
+			echo ' placeholder="Search Certified Instructors" />';
+		}
 	}
 
 	echo '<input type="submit" id="madcow-instructors-search-filter-form-submit" name="madcow-instructors-search-filter-form-submit" value="Filter / Search" />';
