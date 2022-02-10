@@ -266,7 +266,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		$state = $location['state'];
 
 		//Check for username, nicename, firstname, lastname, email, city, state/province
-		if(strpos($search_query, $username) {
+		if(strpos($search_query, $username) === 0) {
 			$temp[] = $instructor;
 		}
 		elseif(strpos($search_query, $nicename) === 0) {
