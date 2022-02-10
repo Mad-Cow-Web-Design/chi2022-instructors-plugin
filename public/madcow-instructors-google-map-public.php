@@ -266,19 +266,10 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		$state = $location['state'];
 
 		//Check for username, nicename, firstname, lastname, email, city, state/province
-		if(strpos($search_query, $username) === 0) {
-			$temp[] = $instructor;
-		}
-		elseif(strpos($search_query, $nicename) === 0) {
-			$temp[] = $instructor;
-		}
-		elseif(strpos($search_query, $firstname) === 0) {
+		if(strpos($search_query, $firstname) === 0) {
 			$temp[] = $instructor;
 		}
 		elseif(strpos($search_query, $lastname) === 0) {
-			$temp[] = $instructor;
-		}
-		elseif(strpos($search_query, $email) === 0) {
 			$temp[] = $instructor;
 		}
 		elseif(strpos($search_query, $city) === 0) {
@@ -288,6 +279,15 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		elseif(strpos($search_query, $state) === 0) {
 			$temp[] = $instructor;
 		}
+		/* elseif(strpos($search_query, $username) === 0) {
+			$temp[] = $instructor;
+		}
+		/* elseif(strpos($search_query, $nicename) === 0) {
+			$temp[] = $instructor;
+		} */
+		/* elseif(strpos($search_query, $email) === 0) {
+			$temp[] = $instructor;
+		} */
 		else {}
 		
 		//Check for Country long name and Country Short Name stored in ACF
