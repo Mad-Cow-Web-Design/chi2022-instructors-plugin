@@ -290,14 +290,17 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		} */
 		else {}
 		
-		//Check for Country long name and Country Short Name stored in ACF
-		if($location['country'] || $location['country_short']) {
-			//Find the short name of the country from the long name, helps to standardize data
-			$key = array_search($location['country'], $countries);
-			
-			//Use strpos instead of regex for performance and in case the full name of the country has missing parts ie: United States / United States of America
-			if((strpos($key,$country_list_filter) === 0) || (strpos($location['country'],$country_list_filter) === 0) || (strpos($search_query,$country_list_filter) === 0)) {
-				$temp[] = $instructor;
+		if($country_list_filter !== "") {
+			//Check for Country long name and Country Short Name stored in ACF
+			if($location['country'] || $location['country_short']) {
+				//Find the short name of the country from the long name, helps to standardize data
+				$key = array_search($location['country'], $countries);
+				
+				//Use strpos instead of regex for performance and in case the full name of the country has missing parts ie: United States / United States of America
+				//if((strpos($key,$country_list_filter) === 0) || (strpos($location['country'],$country_list_filter) === 0) || (strpos($search_query,$country_list_filter) === 0)) {
+				if((strpos($key,$country_list_filter) === 0) || (strpos($location['country'],$country_list_filter) === 0)) {
+					$temp[] = $instructor;
+				}
 			}
 		}
 	endforeach;
