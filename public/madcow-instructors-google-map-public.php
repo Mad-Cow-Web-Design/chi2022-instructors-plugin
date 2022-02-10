@@ -265,29 +265,30 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		$email = $instructor_data->user_email;
 		$city = $location['city'];
 		$state = $location['state'];
-
+		
 		if(isset($search_query) && $search_query !== "") {
 			//Check for search match against various fields
-			if(strpos($firstname, $search_query) !== FALSE) {
+			//search_query is already in all lower case
+			if(strpos(strtolower($firstname), $search_query) !== FALSE) {
 				$temp[] = $instructor;
 			}
-			/* elseif(strpos($lastname, $search_query) !== FALSE) {
+			/* elseif(strpos(strtolower($lastname), $search_query) !== FALSE) {
 				$temp[] = $instructor;
 			}
-			elseif(strpos($city, $search_query) !== FALSE) {
+			elseif(strpos(strtolower($city), $search_query) !== FALSE) {
 				$temp[] = $instructor;
 			}
 			//This should have the state long and short names
-			elseif(strpos($state, $search_query) !== FALSE) {
+			elseif(strpos(strtolower($state), $search_query) !== FALSE) {
 				$temp[] = $instructor;
 			} */
-			/* elseif(strpos($username, $search_query) !== FALSE) {
+			/* elseif(strpos(strtolower($username), $search_query) !== FALSE) {
 				$temp[] = $instructor;
 			}
-			/* elseif(strpos($nicename, $search_query) !== FALSE) {
+			/* elseif(strpos(strtolower($nicename), $search_query) !== FALSE) {
 				$temp[] = $instructor;
 			} */
-			/* elseif(strpos($email, $search_query) !== FALSE) {
+			/* elseif(strpos(strtolower($email), $search_query) !== FALSE) {
 				$temp[] = $instructor;
 			} */
 			else {}
@@ -300,8 +301,9 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 				$key = array_search($location['country'], $countries);
 				
 				//Use strpos instead of regex for performance and in case the full name of the country has missing parts ie: United States / United States of America
-				//if((strpos($key,$country_list_filter) !== FALSE) || (strpos($location['country'],$country_list_filter) !== FALSE) || (strpos($search_query,$country_list_filter) !== FALSE)) {
-				if((strpos($key,$country_list_filter) !== FALSE) || (strpos($location['country'],$country_list_filter) !== FALSE)) {
+				//Check against uppercase versions of everything to normalize
+				//if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($search_query),strtoupper($country_list_filter)) !== FALSE)) {
+				if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE)) {
 					$temp[] = $instructor;
 				}
 			}
