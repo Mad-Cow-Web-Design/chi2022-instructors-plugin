@@ -22,14 +22,10 @@
  */
 
 function instructor_map() {
-    //Returns an array of sanitized form values
-	$form_values = madcow_form_values();
-	$last_country_filtered = $form_values["madcow-instructors-country-list-filter"];
-	$last_certification_filtered = $form_values["madcow-instructors-certification-list-filter"];
-	$last_level_filtered = $form_values["madcow-instructors-level-list-filter"];
-	$last_search = $form_values["madcow-instructors-search"];
+	//Get Instructors
+	$instructors = madcow_instructors_get_instructors("", "", "", "");
 	
-	$instructors = madcow_instructors_get_instructors($last_country_filtered, $last_certification_filtered, $last_level_filtered, $last_search);
+	//Begin HTML for Map
     $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map" data-zoom="16">';
     foreach ( $instructors as $instructor ) :
         // Creating the var instructor_id to use with ACF Pro
@@ -171,19 +167,14 @@ function madcow_instructors_show_instructors_search_filter($show_country_list_fi
 	echo '</form>';
 }
 
-function madcow_instructors_show_instructors_list($country_list_filter = "", $certification_filter = "", $level_filter = "", $search_query = "") {
-	//Returns an array of sanitized form values
-	$form_values = madcow_form_values();
-	$country_list_filter = $form_values["madcow-instructors-country-list-filter"];
-	$certification_filter = $form_values["madcow-instructors-certification-list-filter"];
-	$level_filter = $form_values["madcow-instructors-level-list-filter"];
-	$search_query = $form_values["madcow-instructors-search"];
-	
-	$instructors = madcow_instructors_get_instructors($country_list_filter, $certification_filter, $level_filter, $search_query);
+function madcow_instructors_show_instructors_list() {
+	//Get Instructors
+	$instructors = madcow_instructors_get_instructors("", "", "", "");
 
-	//results count
+	//Results count
 	$num_results = count($instructors);
 
+	//Begin HTML for Count and List
 	$html = '<div id="madcow-instructors-instructor-count" class=""><em>Showing ';
 	$html .= $num_results . ' ';
 	if($num_results == 1) {
@@ -239,19 +230,23 @@ function madcow_instructors_show_instructors_list($country_list_filter = "", $ce
 
 //Returns list of instructors based on filters and search query, defaults to returning full list without filters or search query
 function madcow_instructors_get_instructors($country_list_filter = "", $certification_filter = "", $level_filter = "", $search_query = "") {
-	/* Types of filters
-		Certification - chirunning, chiwalking
-		Level - certified_instructor, senior_instructor, master_instructor, regional_director
-		Country - based on countries with instructors
-		Search */
-
+	if($_POST["madcow-instructors-search-filter-form-submit"]) {
+		//Returns an array of sanitized form values
+		$form_values = madcow_form_values();
+		$country_list_filter = $form_values["madcow-instructors-country-list-filter"];
+		$certification_filter = $form_values["madcow-instructors-certification-list-filter"];
+		$level_filter = $form_values["madcow-instructors-level-list-filter"];
+		$search_query = $form_values["madcow-instructors-search"];
+	}
+	
+	//Get all countries
 	$countries = get_all_countries();	
 	
 	//Get All Instructors
 	$instructors = get_users( array( 'role__in' => array( 'instructor' ) ) );
 
 	//Set up $temp array for holding filtered results
-	$temp = array();	
+	$temp = array();
 
 	//Loop through all Instructors and search / filter
 	foreach ( $instructors as $instructor ) :
