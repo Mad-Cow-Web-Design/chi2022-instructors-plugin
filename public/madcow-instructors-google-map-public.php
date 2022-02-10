@@ -259,7 +259,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 			$city = $location['city'];
 			$state = $location['state'];
 			
-			$instructor_data = get_userdata('id', $instructor->ID);
+			$instructor_data = get_userdata($instructor->ID);
 			$username = $instructor_data->user_login;
 			$nicename = $instructor_data->user_nicename;
 			$firstname = $instructor_data->first_name;
