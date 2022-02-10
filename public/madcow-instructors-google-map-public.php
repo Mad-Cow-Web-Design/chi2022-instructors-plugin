@@ -271,30 +271,32 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		$city = $location['city'];
 		$state = $location['state'];
 
-		//Check for search match against various fields
-		if(strpos($search_query, $firstname) === 0) {
-			$temp[] = $instructor;
+		if(isset($search_query) && $search_query !== "") {
+			//Check for search match against various fields
+			if(strpos($firstname, $search_query) !== FALSE) {
+				$temp[] = $instructor;
+			}
+			/* elseif(strpos($lastname, $search_query) !== FALSE) {
+				$temp[] = $instructor;
+			}
+			elseif(strpos($city, $search_query) !== FALSE) {
+				$temp[] = $instructor;
+			}
+			//This should have the state long and short names
+			elseif(strpos($state, $search_query) !== FALSE) {
+				$temp[] = $instructor;
+			} */
+			/* elseif(strpos($username, $search_query) !== FALSE) {
+				$temp[] = $instructor;
+			}
+			/* elseif(strpos($nicename, $search_query) !== FALSE) {
+				$temp[] = $instructor;
+			} */
+			/* elseif(strpos($email, $search_query) !== FALSE) {
+				$temp[] = $instructor;
+			} */
+			else {}
 		}
-		/* elseif(strpos($search_query, $lastname) === 0) {
-			$temp[] = $instructor;
-		}
-		elseif(strpos($search_query, $city) === 0) {
-			$temp[] = $instructor;
-		}
-		//This should have the state long and short names
-		elseif(strpos($search_query, $state) === 0) {
-			$temp[] = $instructor;
-		} */
-		/* elseif(strpos($search_query, $username) === 0) {
-			$temp[] = $instructor;
-		}
-		/* elseif(strpos($search_query, $nicename) === 0) {
-			$temp[] = $instructor;
-		} */
-		/* elseif(strpos($search_query, $email) === 0) {
-			$temp[] = $instructor;
-		} */
-		else {}
 		
 		if($country_list_filter !== "") {
 			//Check for Country long name and Country Short Name stored in ACF
@@ -303,8 +305,8 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 				$key = array_search($location['country'], $countries);
 				
 				//Use strpos instead of regex for performance and in case the full name of the country has missing parts ie: United States / United States of America
-				//if((strpos($key,$country_list_filter) === 0) || (strpos($location['country'],$country_list_filter) === 0) || (strpos($search_query,$country_list_filter) === 0)) {
-				if((strpos($key,$country_list_filter) === 0) || (strpos($location['country'],$country_list_filter) === 0)) {
+				//if((strpos($key,$country_list_filter) !== FALSE) || (strpos($location['country'],$country_list_filter) !== FALSE) || (strpos($search_query,$country_list_filter) !== FALSE)) {
+				if((strpos($key,$country_list_filter) !== FALSE) || (strpos($location['country'],$country_list_filter) !== FALSE)) {
 					$temp[] = $instructor;
 				}
 			}
