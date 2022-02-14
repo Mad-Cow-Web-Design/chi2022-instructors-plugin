@@ -206,7 +206,8 @@ function madcow_instructors_show_instructors_list() {
             $html .= '<img class="instructor-photo" src="' . $instructor_photo . '">';
         }
         else {
-		    $html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
+            $html .= '<img class="instructor-photo" src="' . esc_url( plugins_url('images/instructor-bio-placeholder.jpg', __FILE__ ) ) . '">';
+		    //$html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
         }
         $html .= '</a>';
 		$html .= '<h5>' . $instructor_name . '</h5>';
