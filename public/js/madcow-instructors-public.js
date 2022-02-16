@@ -48,8 +48,8 @@
         // Create gerenic map.
         var mapArgs = {
             minZoom: 2,
-            maxZoom: 12,
-            //zoom: $el.data('zoom') || 16,
+            maxZoom: 10,
+            zoom: $el.data('zoom') || 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map($el[0], mapArgs);
@@ -141,7 +141,7 @@
         // Case: Single marker.
         if (map.markers.length == 1) {
             map.setCenter(bounds.getCenter());
-
+			map.setZoom( 10 );
             // Case: Multiple markers.
         } else {
             map.fitBounds(bounds);
