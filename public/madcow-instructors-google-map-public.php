@@ -284,7 +284,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 				if(strpos(strtolower($firstname), $search_query) !== FALSE) {
 					$temp[] = $instructor;
 				}
-				/* elseif(strpos(strtolower($lastname), $search_query) !== FALSE) {
+				elseif(strpos(strtolower($lastname), $search_query) !== FALSE) {
 					$temp[] = $instructor;
 				}
 				elseif(strpos(strtolower($city), $search_query) !== FALSE) {
@@ -293,16 +293,16 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 				//This should have the state long and short names
 				elseif(strpos(strtolower($state), $search_query) !== FALSE) {
 					$temp[] = $instructor;
-				} */
-				/* elseif(strpos(strtolower($username), $search_query) !== FALSE) {
+				}
+				elseif(strpos(strtolower($username), $search_query) !== FALSE) {
 					$temp[] = $instructor;
 				}
-				/* elseif(strpos(strtolower($nicename), $search_query) !== FALSE) {
+				elseif(strpos(strtolower($nicename), $search_query) !== FALSE) {
 					$temp[] = $instructor;
-				} */
-				/* elseif(strpos(strtolower($email), $search_query) !== FALSE) {
+				}
+				elseif(strpos(strtolower($email), $search_query) !== FALSE) {
 					$temp[] = $instructor;
-				} */
+				}
 				else {}
 			}
 
