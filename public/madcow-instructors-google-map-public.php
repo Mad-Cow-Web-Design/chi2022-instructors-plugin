@@ -171,6 +171,9 @@ function madcow_instructors_show_instructors_list() {
 	//Get Instructors
 	$instructors = madcow_instructors_get_instructors("", "", "", "");
 
+	echo '<script type="text/javascript">' .
+          'console.log(' . var_dump($instructors) . ');</script>';
+
 	//Results count
 	$num_results = count($instructors);
 
