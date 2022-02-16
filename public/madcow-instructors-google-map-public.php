@@ -25,8 +25,6 @@ function instructor_map() {
 	//Get Instructors
 	$instructors = madcow_instructors_get_instructors("", "", "", "");
 
-	echo '<script type="text/javascript">' . 'console.log(' . var_dump($instructors) . ');</script>';
-
 	//Begin HTML for Map
     $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map" data-zoom="16">';
     foreach ( $instructors as $instructor ) :
