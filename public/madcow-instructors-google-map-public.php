@@ -25,6 +25,8 @@ function instructor_map() {
 	//Get Instructors
 	$instructors = madcow_instructors_get_instructors("", "", "", "");
 
+	echo '<script type="text/javascript">' . 'console.log(' . var_dump($instructors) . ');</script>';
+
 	//Begin HTML for Map
     $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map" data-zoom="16">';
     foreach ( $instructors as $instructor ) :
@@ -170,9 +172,6 @@ function madcow_instructors_show_instructors_search_filter($show_country_list_fi
 function madcow_instructors_show_instructors_list() {
 	//Get Instructors
 	$instructors = madcow_instructors_get_instructors("", "", "", "");
-
-	echo '<script type="text/javascript">' .
-          'console.log(' . var_dump($instructors) . ');</script>';
 
 	//Results count
 	$num_results = count($instructors);
