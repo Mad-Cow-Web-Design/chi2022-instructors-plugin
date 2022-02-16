@@ -32,6 +32,7 @@ function instructor_map() {
         $instructor_id = 'user_'. esc_html( $instructor->ID );
         $instructor_name = $instructor->display_name;
 		$instructor_nicename = $instructor->user_nicename;
+		$instructor_photo = get_field('source_photo', $instructor_id);
         $location = get_field('location', $instructor_id);
 		$certification_level = ucwords(get_field( 'certification_level', $instructor_id, false));
 		$chirunning_certification = get_field( 'chirunning_certification', $instructor_id, false);
@@ -68,7 +69,15 @@ function instructor_map() {
 			$html .= '<div id="marker-' . $instructor_nicename . '" class="marker" data-lat="' . $location["lat"] . '" data-lng="' . $location["lng"] . '" data-marker="' . $marker_icon . '">';
 			$html .= '<div id="' . $instructor_nicename . '" class="madcow-instructors-map-marker">';
 			$html .= '<div id="' . $instructor_nicename . '-photo" class="madcow-instructors-map-marker-left">';
-			$html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
+			$html .= '<a href="' . home_url('/') . 'instructor/' . $instructor_nicename . '/">';
+			if($instructor_photo) {
+				$html .= '<img class="instructor-photo" src="' . $instructor_photo . '">';
+			}
+			else {
+				$html .= '<img class="instructor-photo" src="' . esc_url( plugins_url('images/instructor-bio-placeholder.jpg', __FILE__ ) ) . '">';
+				//$html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
+			}
+			$html .= '</a>';
 			$html .= '</div>';
 			$html .= '<div id="' . $instructor_nicename . '-details" class="madcow-instructors-map-marker-right">';
 			$html .= '<h5><a href="/instructor/' . $instructor_nicename . '/" class="madcow-instructors-map-marker-name-link">' . $instructor_name . '</a></h5>';
