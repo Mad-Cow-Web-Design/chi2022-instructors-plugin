@@ -4,7 +4,7 @@ on:
     branches:
       - master
 env:
-  WPENGINE_ENVIRONMENT_NAME: chiliving2021
+  WPENGINE_ENVIRONMENT_NAME: chiliving
   WPENGINE_SSH_KEY_PRIVATE: ${{secrets.WPENGINE_SSH_KEY_PRIVATE}}
   WPENGINE_SSH_KEY_PUBLIC: ${{secrets.WPENGINE_SSH_KEY_PUBLIC}}
 
