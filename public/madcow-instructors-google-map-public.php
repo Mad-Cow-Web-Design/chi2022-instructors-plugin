@@ -137,8 +137,8 @@ function madcow_instructors_show_instructors_search_filter($show_country_list_fi
 	//Returns an array of sanitized form values
 	$form_values = madcow_form_values();
 	$last_country_filtered = $form_values["madcow-instructors-country-list-filter"];
-	$last_certification_filtered = $form_values["madcow-instructors-certification-list-filter"];
-	$last_level_filtered = $form_values["madcow-instructors-level-list-filter"];
+	// $last_certification_filtered = $form_values["madcow-instructors-certification-list-filter"];
+	// $last_level_filtered = $form_values["madcow-instructors-level-list-filter"];
 	$last_search = $form_values["madcow-instructors-search"];
 
 	//temporarily overriding default values, set up for shortcode parameters later on
@@ -246,8 +246,8 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 		//Returns an array of sanitized form values
 		$form_values = madcow_form_values();
 		$country_list_filter = $form_values["madcow-instructors-country-list-filter"];
-		$certification_filter = $form_values["madcow-instructors-certification-list-filter"];
-		$level_filter = $form_values["madcow-instructors-level-list-filter"];
+		// $certification_filter = $form_values["madcow-instructors-certification-list-filter"];
+		// $level_filter = $form_values["madcow-instructors-level-list-filter"];
 		$search_query = $form_values["madcow-instructors-search"];
 	}
 
@@ -258,7 +258,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 	$instructors = get_users( array( 'role__in' => array( 'instructor' ) ) );
 
 	//If there is a search value or any filter values, otherwise return the full list
-	if(isset($search_query) && $search_query !== "") {
+	if($search_query !== "" || $country_list_filter !== "") {
 
 		//Set up $temp array for holding filtered results
 		$temp = array();
@@ -355,10 +355,26 @@ function madcow_form_values() {
 	$form_values = array();
 	//Assign values from form submission
 	if($_POST["madcow-instructors-search-filter-form-submit"]) {
-		if($_POST["madcow-instructors-country-list-filter"] && $_POST["madcow-instructors-country-list-filter"] !== "") { $form_values["madcow-instructors-country-list-filter"] = $_POST["madcow-instructors-country-list-filter"]; } else { $form_values["madcow-instructors-country-list-filter"] = ""; }
-		if($_POST["madcow-instructors-certification-list-filter"] && $_POST["madcow-instructors-certification-list-filter"] !== "") { $form_values["madcow-instructors-certification-list-filter"] = $_POST["madcow-instructors-certification-list-filter"]; } else { $form_values["madcow-instructors-certification-list-filter"] = ""; }
-		if($_POST["madcow-instructors-level-list-filter"] && $_POST["madcow-instructors-level-list-filter"] !== "") { $form_values["madcow-instructors-level-list-filter"] = $_POST["madcow-instructors-country_list_filter"]; } else { $form_values["madcow-instructors-level-list-filter"] = ""; }
-		if($_POST["madcow-instructors-search"] && $_POST["madcow-instructors-search"] !== "") { $form_values["madcow-instructors-search"] = strtolower($_POST["madcow-instructors-search"]); } else { $form_values["madcow-instructors-search"] = ""; }
+		if($_POST["madcow-instructors-country-list-filter"] && $_POST["madcow-instructors-country-list-filter"] !== "") {
+            $form_values["madcow-instructors-country-list-filter"] = $_POST["madcow-instructors-country-list-filter"];
+        } else {
+            $form_values["madcow-instructors-country-list-filter"] = "";
+        }
+		// if($_POST["madcow-instructors-certification-list-filter"] && $_POST["madcow-instructors-certification-list-filter"] !== "") {
+        //     $form_values["madcow-instructors-certification-list-filter"] = $_POST["madcow-instructors-certification-list-filter"];
+        // } else {
+        //     $form_values["madcow-instructors-certification-list-filter"] = "";
+        // }
+		// if($_POST["madcow-instructors-level-list-filter"] && $_POST["madcow-instructors-level-list-filter"] !== "") {
+        //     $form_values["madcow-instructors-level-list-filter"] = $_POST["madcow-instructors-country_list_filter"];
+        // } else {
+        //     $form_values["madcow-instructors-level-list-filter"] = "";
+        // }
+		if($_POST["madcow-instructors-search"] && $_POST["madcow-instructors-search"] !== "") {
+            $form_values["madcow-instructors-search"] = strtolower($_POST["madcow-instructors-search"]);
+        } else {
+            $form_values["madcow-instructors-search"] = "";
+        }
 	}
 
 	return $form_values;
