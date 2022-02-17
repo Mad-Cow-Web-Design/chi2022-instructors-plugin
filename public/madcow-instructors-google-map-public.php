@@ -258,7 +258,7 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 	$instructors = get_users( array( 'role__in' => array( 'instructor' ) ) );
 
 	//If there is a search value or any filter values, otherwise return the full list
-	if(isset($search_query) && $search_query !== "") {
+	if((isset($search_query) && $search_query !== "")) || (isset($country_list_filter) && $country_list_filter !== "") {
 
 		//Set up $temp array for holding filtered results
 		$temp = array();
