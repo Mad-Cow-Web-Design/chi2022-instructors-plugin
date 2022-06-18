@@ -47,8 +47,7 @@ function instructor_map() {
 		else {
 			if((isset($chiwalking_certification) && !isset($chirunning_certification)) || (($chiwalking_certification == "yes") && ($chirunning_certification == "no"))) {
 				$marker_icon = esc_url( plugins_url('images/pin-chiwalking-instructor.png', __FILE__ ) );
-			}
-			else {
+			} else {
 				switch ($certification_level) {
 					case "Certified Instructor":
 						$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
@@ -72,10 +71,8 @@ function instructor_map() {
 			$html .= '<a href="' . home_url('/') . 'instructor/' . $instructor_nicename . '/">';
 			if($instructor_photo) {
 				$html .= '<img class="instructor-photo" src="' . $instructor_photo . '">';
-			}
-			else {
+			} else {
 				$html .= '<img class="instructor-photo" src="' . esc_url( plugins_url('images/instructor-bio-placeholder.jpg', __FILE__ ) ) . '">';
-				//$html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
 			}
 			$html .= '</a>';
 			$html .= '</div>';
@@ -90,7 +87,6 @@ function instructor_map() {
         endif;
     endforeach;
     $html .= '</div><!-- end acf map -->';
-
     return $html;
 }
 
@@ -166,8 +162,7 @@ function madcow_instructors_show_instructors_search_filter($show_country_list_fi
 		echo '<label for="madcow-instructors-search"></label><input type="text" id="madcow-instructors-search" name="madcow-instructors-search"';
 		if(isset($last_search) && $last_search !== "") {
 			echo ' value="'. $last_search . '" />';
-		}
-		else {
+		} else {
 			echo ' placeholder="Search Certified Instructors" />';
 		}
 	}
@@ -188,12 +183,10 @@ function madcow_instructors_show_instructors_list() {
 	$html .= $num_results . ' ';
 	if($num_results == 1) {
 		$html .= 'instructor';
-	}
-	else {
+	} else {
 		$html .= 'instructors';
 	}
 	$html .= '</em></div>';
-
 	$html .= '<div id="madcow-instructors-instructor-list" class="">';
 
 	foreach ( $instructors as $instructor ) :
@@ -213,8 +206,7 @@ function madcow_instructors_show_instructors_list() {
         $html .= '<a href="' . home_url('/') . 'instructor/' . $instructor_nicename . '/">';
         if($instructor_photo) {
             $html .= '<img class="instructor-photo" src="' . $instructor_photo . '">';
-        }
-        else {
+        } else {
             $html .= '<img class="instructor-photo" src="' . esc_url( plugins_url('images/instructor-bio-placeholder.jpg', __FILE__ ) ) . '">';
 		    //$html .= get_avatar($instructor->ID, 96, '', $instructor_name, array());
         }
@@ -232,9 +224,7 @@ function madcow_instructors_show_instructors_list() {
         $html .= '</article>';
 		$html .= '</div>';
 	endforeach;
-
 	$html .= '</div>';
-
     return $html;
 }
 
@@ -276,35 +266,8 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 			$nicename = $instructor_data->user_nicename;
 			$firstname = $instructor_data->first_name;
 			$lastname = $instructor_data->last_name;
+			$fullname = $firstname . " " . $lastname;
 			$email = $instructor_data->user_email;
-
-			if(isset($search_query) && $search_query !== "") {
-				//Check for search match against various fields
-				//search_query is already in all lower case
-				if(strpos(strtolower($firstname), $search_query) !== FALSE) {
-					$temp[] = $instructor;
-				}
-				elseif(strpos(strtolower($lastname), $search_query) !== FALSE) {
-					$temp[] = $instructor;
-				}
-				elseif(strpos(strtolower($city), $search_query) !== FALSE) {
-					$temp[] = $instructor;
-				}
-				//This should have the state long and short names
-				elseif(strpos(strtolower($state), $search_query) !== FALSE) {
-					$temp[] = $instructor;
-				}
-				elseif(strpos(strtolower($username), $search_query) !== FALSE) {
-					$temp[] = $instructor;
-				}
-				elseif(strpos(strtolower($nicename), $search_query) !== FALSE) {
-					$temp[] = $instructor;
-				}
-				elseif(strpos(strtolower($email), $search_query) !== FALSE) {
-					$temp[] = $instructor;
-				}
-				else {}
-			}
 
 			if($country_list_filter !== "") {
 				//Check for Country long name and Country Short Name stored in ACF
@@ -316,8 +279,71 @@ function madcow_instructors_get_instructors($country_list_filter = "", $certific
 					//Check against uppercase versions of everything to normalize
 					//if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($search_query),strtoupper($country_list_filter)) !== FALSE)) {
 					if((strpos(strtoupper($key),strtoupper($country_list_filter)) !== FALSE) || (strpos(strtoupper($location['country']),strtoupper($country_list_filter)) !== FALSE)) {
+						if(isset($search_query) && $search_query !== "") {
+							//Check for search match against various fields
+							//search_query is already in all lower case
+							if(strpos(strtolower($firstname), $search_query) !== FALSE) {
+								$temp[] = $instructor;
+							}
+							elseif(strpos(strtolower($lastname), $search_query) !== FALSE) {
+								$temp[] = $instructor;
+							}
+							elseif(strpos(strtolower($fullname), $search_query) !== FALSE) {
+								$temp[] = $instructor;
+							}
+							elseif(strpos(strtolower($city), $search_query) !== FALSE) {
+								$temp[] = $instructor;
+							}
+							//This should have the state long and short names
+							elseif(strpos(strtolower($state), $search_query) !== FALSE) {
+								$temp[] = $instructor;
+							}
+							elseif(strpos(strtolower($username), $search_query) !== FALSE) {
+								$temp[] = $instructor;
+							}
+							elseif(strpos(strtolower($nicename), $search_query) !== FALSE) {
+								$temp[] = $instructor;
+							}
+							elseif(strpos(strtolower($email), $search_query) !== FALSE) {
+								$temp[] = $instructor;
+							}
+							else {}
+						}
+						else {
+							$temp[] = $instructor;
+						}
+					}
+				}
+			} else {
+				if(isset($search_query) && $search_query !== "") {
+					//Check for search match against various fields
+					//search_query is already in all lower case
+					if(strpos(strtolower($firstname), $search_query) !== FALSE) {
 						$temp[] = $instructor;
 					}
+					elseif(strpos(strtolower($lastname), $search_query) !== FALSE) {
+						$temp[] = $instructor;
+					}
+					elseif(strpos(strtolower($fullname), $search_query) !== FALSE) {
+						$temp[] = $instructor;
+					}
+					elseif(strpos(strtolower($city), $search_query) !== FALSE) {
+						$temp[] = $instructor;
+					}
+					//This should have the state long and short names
+					elseif(strpos(strtolower($state), $search_query) !== FALSE) {
+						$temp[] = $instructor;
+					}
+					elseif(strpos(strtolower($username), $search_query) !== FALSE) {
+						$temp[] = $instructor;
+					}
+					elseif(strpos(strtolower($nicename), $search_query) !== FALSE) {
+						$temp[] = $instructor;
+					}
+					elseif(strpos(strtolower($email), $search_query) !== FALSE) {
+						$temp[] = $instructor;
+					}
+					else {}
 				}
 			}
 
@@ -391,8 +417,6 @@ function madcow_instructors_show_country_list_filter($last_country_filtered) {
 		$html .= 'selected="selected"';
 	}
 	$html .= '>Search by Country / Region</option>';
-
-
 	foreach($countries as $country=>$country_name) :
 		$html .= '<option value="' . $country . '"';
 		if($last_country_filtered == $country) {
@@ -409,28 +433,21 @@ function madcow_instructors_show_country_list_filter($last_country_filtered) {
 function madcow_instructors_show_certification_filter($last_certification_filtered) {
 	$html = '<label for="madcow-instructors-certification-list-filter">Country: </label>';
 	$html .= '<select name="madcow-instructors-certification-list-filter" id="madcow-instructors-certification-list-filter" class="madcow-instructors-filter-select madcow-instructors-certification-select">';
-
 	//options for certifications
-
 	$html .= '</select>';
-
 	return $html;
 }
 
 function madcow_instructors_show_level_filter($last_level_filtered) {
 	$html = '<label for="madcow-instructors-level-list-filter">Country: </label>';
 	$html .= '<select name="madcow-instructors-level-list-filter" id="madcow-instructors-level-list-filter" class="madcow-instructors-filter-select madcow-instructors-level-select">';
-
 	//options for levels
-
 	$html .= '</select>';
-
 	return $html;
 }
 
 function madcow_instructors_get_instructor_countries() {
 	$countries = get_all_countries();
-
 	$instructor_countries = array();
  	$instructors = get_users( array( 'role__in' => array( 'instructor' ) ) );
 
@@ -451,8 +468,7 @@ function madcow_instructors_get_instructor_countries() {
 }
 
 function get_all_countries() {
-	$countries = array
-	(
+	$countries = array (
 		'AF' => 'Afghanistan',
 		'AX' => 'Aland Islands',
 		'AL' => 'Albania',
@@ -763,74 +779,154 @@ function madcow_instructors_update_instructor_country($user_id) {
 function workshop_map() {
 
 	$workshops = madcow_instructors_get_workshops();
+	echo "<script>console.log('On the map: " . count($workshops) . "');</script>";
+	//Set up array to hold Workshop ID's that have already printed
+	$printed_workshops = array();
 
     $html = '<div id="madcow-instructors-find-an-instructor" class="acf-map madcow-instructors-google-map madcow-instructors-workshop-map" data-zoom="16">';
-    foreach ( $workshops as $workshop ) :
+    foreach ( $workshops as $workshop )	{
         // Creating the var workshop_id to use with ACF Pro
         $workshop_id = esc_html( $workshop->ID );
-		$workshop_slug = esc_html( $workshop->post_name );
-		$workshop_name = get_field('name', $workshop_id);
-        $location = get_field('location', $workshop_id);
+		$no_match = TRUE;
 
-		$workshop_instructor_id = get_field('instructor', $workshop_id);
-		$workshop_instructor = get_user_by('id', $workshop_instructor_id);
-		$workshop_instructor_name = $workshop_instructor->display_name;
-
-		$workshop_start_date = get_field('start_date_&_time', $workshop_id);
-		//$workshop_start_date = new DateTime($workshop_start_date);
-
-		$workshop_venue = get_field('venue', $workshop_id);
-
-		//Determine map marker based on the type of Workshop
-		$types = get_the_terms( $workshop->ID, 'workshop_type');
-		if ( ! empty( $types ) && ! is_wp_error( $types ) ) {
-			$workshop_types = wp_list_pluck( $types, 'slug' );
-		}
-
-		$marker_icon = "";
-
-		switch ($workshop_types[0]) {
-			case "chirunning-clinic":
-				$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
-				break;
-			case "chirunning-tune-up":
-				$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
-				break;
-			case "chirunning-workshop":
-				$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
-				break;
-			case "chiwalk-run-workshop":
-				$marker_icon = esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) );
-				break;
-			case "chiwalking-workshop":
-				$marker_icon = esc_url( plugins_url('/images/pin-chiwalking-instructor.png', __FILE__ ) );
-				break;
-			default:
-				$marker_icon = "";
-		}
-
-        if( $location['lat'] && $location['lng'] ) :
-			$html .= '<div id="marker-' . $workshop_name . '" class="marker" data-lat="' . $location["lat"] . '" data-lng="' . $location["lng"] . '"';
-			if($marker_icon) {
-				$html .= ' data-marker="' . $marker_icon . '"';
+		if(is_array($printed_workshops) && (!empty($printed_workshops))) {
+			if(in_array($workshop_id,$printed_workshops))
+			{
+				$no_match = FALSE;
 			}
-			$html .= '>';
-			$html .= '<div id="' . $workshop_name . '" class="madcow-instructors-workshops-map-marker">';
-			$html .= '<h5><a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-map-marker-name-link">' . $workshop_name . '</a></h5>';
-			//Add Instructor
-			$html .= '<p>' . $workshop_instructor_name . '</p>';
-			//Add date/time
-			$html .= '<p>' . $workshop_start_date . '</p>';
-			//Add venue
-			$html .= '<p>' . $workshop_venue . '</p>';
-			$html .= '<a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-list-button madcow-instructors-infowindow-button"><span>VIEW WORKSHOP</span></a>';
-			$html .= '</div>';
-			$html .= '</div>';
-        endif;
-    endforeach;
-    $html .= '</div><!-- end acf map -->';
+		}
 
-    return $html;
+		//Check to see if the current workshop has already been printed
+		if(empty($printed_workshops) || $no_match) {
+			//Get the current workshop location
+			$location = get_field('location', $workshop_id);
+
+			//Get other relevant workshop details
+			$workshop_slug = esc_html( $workshop->post_name );
+			$workshop_name = get_field('name', $workshop_id);
+
+			//Get parts of start date/time
+            $chi_workshop_start_day = get_field('chi_start_day', $workshop_id);
+            $chi_workshop_start_time = get_field('chi_start_time', $workshop_id);
+            $chi_workshop_end_day = get_field('chi_end_day', $workshop_id);
+            $chi_workshop_end_time = get_field('chi_end_time', $workshop_id);
+
+			//Create string containing start and end date/time
+			$workshop_start_end = "";
+            $workshop_start_end .= $chi_workshop_start_day;
+
+            if ($chi_workshop_start_day == $chi_workshop_end_day ) :
+                 $workshop_start_end .= '';
+            elseif (!isset($chi_workshop_end_day) || empty($chi_workshop_end_day)) :
+                 $workshop_start_end .= '';
+            elseif ($chi_workshop_start_day !== $chi_workshop_end_day ) :
+                 $workshop_start_end .= ' - ' . $chi_workshop_end_day ;
+            endif;
+
+            $workshop_start_end .= ' | ' .  $chi_workshop_start_time;
+
+            if ($chi_workshop_start_time == $chi_workshop_end_time ) :
+                $workshop_start_end .= '';
+            elseif (!isset($chi_workshop_end_time) || empty($chi_workshop_end_time)) :
+                $workshop_start_end .= '';
+            elseif ($chi_workshop_start_time !== $chi_workshop_end_time ) :
+                $workshop_start_end .= ' - ' . $chi_workshop_end_time ;
+            endif;
+
+			$workshop_venue = get_field('venue', $workshop_id);
+
+			//Get instructor details
+			$workshop_instructor_id = get_field('instructor', $workshop_id);
+			$workshop_instructor = get_user_by('id', $workshop_instructor_id);
+			$workshop_instructor_name = $workshop_instructor->display_name;
+
+			//Determine map marker based on the type of Workshop
+			$types = get_the_terms( $workshop->ID, 'workshop_type');
+			if ( ! empty( $types ) && ! is_wp_error( $types ) ) {
+				$workshop_types = wp_list_pluck( $types, 'slug' );
+			}
+
+			$marker_icon = "";
+
+			//Do we want a different marker in the case of multiple results at the same location?
+			switch ($workshop_types[0])	{
+				case "chirunning-clinic":
+					$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
+					break;
+				case "chirunning-tune-up":
+					$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
+					break;
+				case "chirunning-workshop":
+					$marker_icon = esc_url( plugins_url('images/pin-chirunning-chiwalking-instructor.png', __FILE__ ) );
+					break;
+				case "chiwalk-run-workshop":
+					$marker_icon = esc_url( plugins_url('images/pin-master-instructor.png', __FILE__ ) );
+					break;
+				case "chiwalking-workshop":
+					$marker_icon = esc_url( plugins_url('/images/pin-chiwalking-instructor.png', __FILE__ ) );
+					break;
+				default:
+					$marker_icon = "";
+			}
+
+			if( $location ) {
+				if( $location['lat'] && $location['lng'] ) {
+					$html .= '<div id="marker-' . $workshop_name . '" class="marker" data-lat="' . $location['lat'] . '" data-lng="' . $location['lng'] . '"';
+					if($marker_icon)
+					{
+						$html .= ' data-marker="' . $marker_icon . '"';
+					}
+					$html .= '>';
+
+					$html .= '<div id="' . $workshop_name . '" class="madcow-instructors-workshops-map-marker">';
+					$html .= '<h5><a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-map-marker-name-link">' . $workshop_name . '</a></h5>';
+					$html .= '<p>' . $workshop_instructor_name . '</p>';
+					$html .= '<p>' . $workshop_start_end . '</p>';
+					$html .= '<p>' . $workshop_venue . '</p>';
+					$html .= '<a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-list-button madcow-instructors-infowindow-button"><span>VIEW WORKSHOP</span></a>';
+					$html .= '</div>';
+					//Add Workshops to array as they print
+					$printed_workshops[] .= $workshop_id;
+
+					foreach ( $workshops as $checking_workshop ) {
+						$checking_workshop_id = esc_html( $checking_workshop->ID );
+						$checking_location = get_field('location', $checking_workshop_id);
+
+						if( $checking_location ) {
+							if(($workshop_id !== $checking_workshop_id) && (!in_array($checking_workshop_id,$printed_workshops))) {
+								$workshop_id = $checking_workshop_id;
+								if(($location['lat'] == $checking_location['lat'] && $location['lng'] == $checking_location['lng']) || (strcmp($location["address"],$checking_location["address"]) == 0)) {
+									$location = $checking_location;
+									//Get other relevant workshop details
+									$workshop_slug = esc_html( $checking_workshop->post_name );
+									$workshop_name = get_field('name', $workshop_id);
+									$workshop_venue = get_field('venue', $workshop_id);
+
+									//Get instructor details
+									$workshop_instructor_id = get_field('instructor', $workshop_id);
+									$workshop_instructor = get_user_by('id', $workshop_instructor_id);
+									$workshop_instructor_name = $workshop_instructor->display_name;
+
+									$html .= '<div id="' . $workshop_name . '" class="madcow-instructors-workshops-map-marker">';
+									$html .= '<h5><a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-map-marker-name-link">' . $workshop_name . '</a></h5>';
+									$html .= '<p>' . $workshop_instructor_name . '</p>';
+									$html .= '<p>' . $workshop_start_end . '</p>';
+									$html .= '<p>' . $workshop_venue . '</p>';
+									$html .= '<a href="' . home_url('/') . 'workshops/' . $workshop_slug . '/" class="madcow-instructors-list-button madcow-instructors-infowindow-button"><span>VIEW WORKSHOP</span></a>';
+									$html .= '</div>';
+
+									$printed_workshops[] .= $workshop_id;
+								}
+							}
+						}
+					}
+				$html .= '</div>';
+				}
+			}
+		}
+	}
+	$html .= '</div>';
+	return $html;
 }
 
 function madcow_workshops_show_map_legend() {
@@ -859,6 +955,7 @@ function madcow_workshops_show_map_legend() {
 }
 
 function madcow_instructors_get_workshops() {
+	$date_now = date('Y-m-d');
 	return get_posts( array(
         'posts_per_page' => -1,
         'post_type' => 'workshops',
@@ -876,3 +973,104 @@ function madcow_instructors_get_workshops() {
        ),
     ) );
 }
+
+//ADMIN SETTINGS PAGE (currently used for troubleshooting)
+
+/* function madcow_instructors_options_page() {
+    add_menu_page(
+        'MadCow Web Instructors',
+        'MadCow Web Instructors Options',
+        'manage_options',
+        'madcow_instructors',
+        'madcow_instructors_options_page_html'
+    );
+}
+
+add_action( 'admin_menu', 'madcow_instructors_options_page' );
+
+function madcow_instructors_options_page_html() {
+    // check user capabilities
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+	echo debugging_workshop_map();
+}
+
+function debugging_workshop_map() {
+
+	$workshops = madcow_instructors_get_workshops();
+	echo "<script>console.log('On the map: " . count($workshops) . "');</script>";
+	//var_dump($workshops);
+
+	foreach ( $workshops as $workshop )
+	{
+		// Creating the var workshop_id to use with ACF Pro
+		$workshop_id = esc_html( $workshop->ID );
+
+		//Get the current workshop location
+		$location = get_field('location', $workshop_id);
+		//var_dump($location);
+
+		//Get other relevant workshop details
+		$workshop_slug = esc_html( $workshop->post_name );
+		$workshop_name = get_field('name', $workshop_id);
+
+		//Get instructor details
+		$workshop_instructor_id = get_field('instructor', $workshop_id);
+		$workshop_instructor = get_user_by('id', $workshop_instructor_id);
+		$workshop_instructor_name = $workshop_instructor->display_name;
+
+		if( $location )
+		{
+			if( $location['lat'] && $location['lng'] )
+			{
+				echo "<div style='border: 1px solid #000;'>";
+				echo $workshop_id . " - " . $workshop_name . "<br />" . $location['lat'] . ". " . $location['lng'] . "<br />" . $location["address"] . "<br /><br />";
+				foreach ( $workshops as $checking_workshop )
+				{
+					$checking_workshop_id = esc_html( $checking_workshop->ID );
+					$checking_location = get_field('location', $checking_workshop_id);
+
+					if( $checking_location )
+					{
+						if($workshop_id !== $checking_workshop_id)
+						{
+							//$workshop_id = $checking_workshop_id;
+
+							//Get other relevant workshop details
+							$workshop_slug = esc_html( $checking_workshop->post_name );
+							$workshop_name = get_field('name', $checking_workshop_id);
+
+							//Get instructor details
+							$workshop_instructor_id = get_field('instructor', $checking_workshop_id);
+							$workshop_instructor = get_user_by('id', $workshop_instructor_id);
+							$workshop_instructor_name = $workshop_instructor->display_name;
+
+							echo $checking_workshop_id . " - " . $workshop_name . "<br />" . $checking_location['lat'] . ". " . $checking_location['lng'] . "<br />" . $checking_location["address"] . "<br />";
+
+							if(($location['lat'] == $checking_location['lat'] && $location['lng'] == $checking_location['lng']) || (strcmp($location["address"],$checking_location["address"]) == 0))
+							{
+								echo "MATCH";
+							}
+							else {
+								echo "NO MATCH";
+							}
+							echo " - ";
+							//if(strcmp($location["address"],$checking_location["address"]) == 0)
+							//{
+								//echo "MATCH";
+							//}
+							//else {
+								//echo "NO MATCH";
+							//}
+							echo "<br /><br />";
+						}
+					}
+				}
+				echo "</div>";
+			}
+		}
+	}
+	return $html;
+} */
