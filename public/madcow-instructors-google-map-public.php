@@ -845,7 +845,6 @@ function workshop_map() {
 			if ( ! empty( $types ) && ! is_wp_error( $types ) ) {
 				$workshop_types = wp_list_pluck( $types, 'slug' );
 			}
-
 			$marker_icon = "";
 
 			//Do we want a different marker in the case of multiple results at the same location?
